@@ -15,56 +15,63 @@ export type OlfactoryAccord = {
 }
 
 export const olfactory_families: OlfactoryFamily[] = [
-    {
-      "id": 1,
-      "name": "Fresh",
-      "slug": "fresh",
-      "description": "Bright, clean, and airy scents that evoke lightness, water, or greenery.",
-      "order": 1
-    },
-    {
-      "id": 2,
-      "name": "Floral",
-      "slug": "floral",
-      "description": "Fragrances centered on blossoms and petals, from soft powdery florals to rich white flowers.",
-      "order": 2
-    },
-    {
-      "id": 3,
-      "name": "Fruity",
-      "slug": "fruity",
-      "description": "Sweet, juicy, or tart fruit impressions that add liveliness and playfulness to compositions.",
-      "order": 3
-    },
-    {
-      "id": 4,  
-      "name": "Woody",
-      "slug": "woody",
-      "description": "Grounded scents built from woods, mosses, and earthy materials, providing depth and warmth.",
-      "order": 4
-    },
-    {
-      "id": 5,
-      "name": "Warm",
-      "slug": "warm",
-      "description": "Comforting, rich tones built around amber, vanilla, and gourmand nuances that feel cozy and enveloping.",
-      "order": 5
-    },
-    {
-      "id": 6,
-      "name": "Resinous",
-      "slug": "resinous",
-      "description": "Deep, smoky, or balsamic accords from natural resins, incense, and woods that add density and mystery.",
-      "order": 6
-    },
-    {
-      "id": 7,
-      "name": "Animalic",
-      "slug": "animalic",
-      "description": "Musky, leathery, or skin-like accords that lend sensuality, depth, and a raw natural character.",
-      "order": 7
-    }
-  ]
+  {
+    id: 1,
+    name: "Fresh",
+    slug: "fresh",
+    description:
+      "Bright, clean, and airy scents that evoke lightness, water, or greenery.",
+    order: 1,
+  },
+  {
+    id: 2,
+    name: "Floral",
+    slug: "floral",
+    description:
+      "Fragrances centered on blossoms and petals, from soft powdery florals to rich white flowers.",
+    order: 2,
+  },
+  {
+    id: 3,
+    name: "Fruity",
+    slug: "fruity",
+    description:
+      "Sweet, juicy, or tart fruit impressions that add liveliness and playfulness to compositions.",
+    order: 3,
+  },
+  {
+    id: 4,
+    name: "Woody",
+    slug: "woody",
+    description:
+      "Grounded scents built from woods, mosses, and earthy materials, providing depth and warmth.",
+    order: 4,
+  },
+  {
+    id: 5,
+    name: "Warm",
+    slug: "warm",
+    description:
+      "Comforting, rich tones built around amber, vanilla, and gourmand nuances that feel cozy and enveloping.",
+    order: 5,
+  },
+  {
+    id: 6,
+    name: "Resinous",
+    slug: "resinous",
+    description:
+      "Deep, smoky, or balsamic accords from natural resins, incense, and woods that add density and mystery.",
+    order: 6,
+  },
+  {
+    id: 7,
+    name: "Animalic",
+    slug: "animalic",
+    description:
+      "Musky, leathery, or skin-like accords that lend sensuality, depth, and a raw natural character.",
+    order: 7,
+  },
+]
 
 
 export const olfactory_accords: OlfactoryAccord[] = [
@@ -95,6 +102,7 @@ export const olfactory_accords: OlfactoryAccord[] = [
   { name: "Woody", slug: "woody", familyId: 4, description: "Warm, grounding woods such as cedar, sandalwood, or vetiver.", color: "oklch(48% 0.10 62)" },
   { name: "DryWood", slug: "drywood", familyId: 4, description: "Crisp, arid woods like guaiac or oak, often smoky or slightly bitter.", color: "oklch(55.3% 0.013 58.071)" },
   { name: "Earthy", slug: "earthy", familyId: 4, description: "Soil-like, rooty, or mineral dampness evoking the forest floor.", color: "oklch(55.5% 0.163 48.998)" },
+  { name: "Chypre", slug: "chypre", familyId: 4, description: "A classic structure balancing fresh citrus top notes with a mossy, woody, and resinous base.", color: "oklch(46% 0.17 4)" },
   { name: "Mossy", slug: "mossy", familyId: 4, description: "Soft green dampness of moss and lichen, often used in chypre blends.", color: "oklch(53.2% 0.157 131.589)" },
   { name: "Oud", slug: "oud", familyId: 4, description: "Dark, resinous agarwood with smoky, leathery, or balsamic undertones.", color: "oklch(44% 0.01 74)" },
 
@@ -125,6 +133,7 @@ export type Season = "spring" | "summer" | "fall" | "winter"
 export type Fragrance = {
   name: string
   brand: string
+  imageUrl?: string
   concentration: string
   gender: Gender
   suitableTimes: SuitableTime[]
@@ -149,6 +158,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Oud Voyager",
     brand: "Tom Ford",
+    imageUrl: "https://i.ibb.co/PZPnTZCN/tom-ford-oud-voyager.jpg",
     concentration: "Eau de Parfum",
     gender: "unisex",
     suitableTimes: ["day", "night"],
@@ -172,6 +182,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Y",
     brand: "Yves Saint Laurent",
+    imageUrl: "https://i.ibb.co/Cpc31JjR/ysl-y-edp-1.jpg",
     concentration: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day", "night"],
@@ -201,6 +212,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Acqua di Giò Profondo",
     brand: "Giorgio Armani",
+    imageUrl: "https://i.ibb.co/0Vzpry7y/giorgio-armani-acqua-di-gio-profondo.webp",
     concentration: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day"],
@@ -223,17 +235,18 @@ export const fragrances: Fragrance[] = [
   {
     name: "Ultra Male",
     brand: "Jean Paul Gaultier",
-    concentration: "Eau de Toilette",
+    imageUrl: "https://i.ibb.co/mV490g8y/jean-paul-gaultier-ultra-male.jpg",
+    concentration: "Eau de Toilette Intense",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
     notes: [
+      "Black Lavender",
       "Pear",
+      "Woody Vanilla",
+      "Bergamot",
+      "Mint",
       "Lavender",
-      "Cinnamon",
-      "Vanilla",
-      "Amber",
-      "Patchouli",
     ],
     accords: {
       main: ["Sweet", "WarmSpicy"],
@@ -252,6 +265,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Eros Flame",
     brand: "Versace",
+    imageUrl: "https://i.ibb.co/TMYQLjnm/versace-eros-flame.webp",
     concentration: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["night"],
@@ -280,6 +294,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Terre d’Hermès",
     brand: "Hermès",
+    imageUrl: "https://i.ibb.co/3VwPHYv/hermes-terre-d-hermes.jpg",
     concentration: "Eau de Toilette",
     gender: "male",
     suitableTimes: ["day"],
@@ -302,6 +317,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "MYSLF",
     brand: "Yves Saint Laurent",
+    imageUrl: "https://i.ibb.co/5gshsXm8/ysl-myslf.webp",
     concentration: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day", "night"],
@@ -324,6 +340,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "1 Million",
     brand: "Paco Rabanne",
+    imageUrl: "https://i.ibb.co/5gW9KTRT/paco-rabanne-1-million.jpg",
     concentration: "Eau de Toilette",
     gender: "male",
     suitableTimes: ["night"],
@@ -346,6 +363,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "The One for Men",
     brand: "Dolce & Gabbana",
+    imageUrl: "https://i.ibb.co/r2JP7LVY/dolce-and-gabbana-the-one.webp",
     concentration: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["night"],
@@ -368,20 +386,19 @@ export const fragrances: Fragrance[] = [
   {
     name: "Gaultier Divine Elixir",
     brand: "Jean Paul Gaultier",
-    concentration: "Eau de Parfum Elixir",
+    imageUrl: "https://i.ibb.co/nqbDtVbm/jean-paul-gaultier-gaultier-divine-elixir.webp",
+    concentration: "Parfum",
     gender: "female",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
     notes: [
-      "Orange Blossom",
-      "Jasmine",
-      "Honey",
-      "Tonka Bean",
-      "Patchouli",
+      "Salty Note",
+      "Tuberose",
+      "Tonka Bean"
     ],
     accords: {
-      main: ["WhiteFloral", "Sweet"],
-      sub: ["Amber", "Vanilla", "WarmSpicy"],
+      main: ["Floral", "Amber"],
+      sub: ["Honey", "Vanilla", "Marine"],
     },
     description:
       "An elixir of divine femininity — luminous white florals coated in honeyed sweetness and warm amber.",
@@ -396,6 +413,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Libre",
     brand: "Yves Saint Laurent",
+    imageUrl: "https://i.ibb.co/SDLVgyMr/ysl-libre.webp",
     concentration: "Eau de Parfum",
     gender: "female",
     suitableTimes: ["day", "night"],
@@ -424,6 +442,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "Good Girl Blush Elixir",
     brand: "Carolina Herrera",
+    imageUrl: "https://i.ibb.co/JRrKhWP2/carolina-herrera-good-girl-blush-elixir.webp",
     concentration: "Eau de Parfum Elixir",
     gender: "female",
     suitableTimes: ["night"],
@@ -437,15 +456,16 @@ export const fragrances: Fragrance[] = [
       "A sensual re-imagining of Good Girl — creamy florals and glowing vanilla enriched with the intensity of an elixir.",
     otherDetails: {
       launchYear: 2023,
-      fragranceFamily: "Amber Floral",
-      topNotes: ["Ylang-Ylang"],
-      heartNotes: ["Rose"],
-      baseNotes: ["Vanilla", "Tonka Bean", "Patchouli"],
+      fragranceFamily: "Chypre Ambery Floral",
+      topNotes: ["Bergamot", "Bitter Almond"],
+      heartNotes: ["Ylang-Ylang", "Rose"],
+      baseNotes: ["Vanilla", "Patchouli"],
     },
   },
   {
     name: "La Nuit de l’Homme",
     brand: "Yves Saint Laurent",
+    imageUrl: "https://i.ibb.co/bjy3MZ39/ysl-la-nuit-de-lhomme.webp",
     concentration: "Eau de Toilette",
     gender: "male",
     suitableTimes: ["night"],
@@ -465,4 +485,62 @@ export const fragrances: Fragrance[] = [
       baseNotes: ["Vetiver", "Coumarin"],
     },
   },
+  { 
+    "name": "Virgin Island Water",
+    "brand": "Creed",
+    "imageUrl": "https://i.ibb.co/1Ghfw4Cr/creed-virgin-island-water.jpg",
+    "concentration": "Eau de Parfum",
+    "gender": "unisex",
+    "suitableTimes": ["day"],
+    "suitableSeasons": ["spring", "summer"],
+    "notes": [
+      "Coconut",
+      "Lime",
+      "Bergamot",
+      "Ylang-Ylang",
+      "White Rum",
+      "Sugar Cane"
+    ],
+    "accords": {
+      "main": ["Citrus", "Sweet"],
+      "sub": ["Coconut", "FreshSpicy", "Woody", "Marine"]
+    },
+    "description": "A tropical escape bottled — the scent of lime, coconut, and white rum carried on a warm sea breeze. Inspired by sailing through the Caribbean waters.",
+    "otherDetails": {
+      "launchYear": 2007,
+      "fragranceFamily": "Citrus Gourmand",
+      "topNotes": ["Lime", "Bergamot", "Mandarin"],
+      "heartNotes": ["Coconut", "Ylang-Ylang", "Jasmine"],
+      "baseNotes": ["White Rum", "Sugar Cane", "Musk"]
+    }
+  },
+  {
+    "name": "Boss Bottled Absolu",
+    "brand": "Hugo Boss",
+    imageUrl: "https://i.ibb.co/R4J30j1m/hugo-boss-bottled-absolu.jpg",
+    "concentration": "Eau de Parfum",
+    "gender": "male", // Male
+    "suitableTimes": ["night"], // Night
+    "suitableSeasons": ["fall", "winter"], // Fall, Winter
+    "notes": [
+      "Apple",
+      "Cinnamon",
+      "Cardamom",
+      "Sandalwood",
+      "Vanilla",
+      "Musk"
+    ],
+    "accords": {
+      "main": ["WarmSpicy", "Sweet"],
+      "sub": ["Woody", "Vanilla", "Amber", "Fruity"]
+    },
+    "description": "A richer, more intense expression of the iconic Boss Bottled DNA. Crisp apple and warm cinnamon blend with deep woods and vanilla for timeless masculine sophistication.",
+    "otherDetails": {
+      "launchYear": 2019,
+      "fragranceFamily": "Woody Spicy",
+      "topNotes": ["Apple", "Cardamom"],
+      "heartNotes": ["Cinnamon", "Sage"],
+      "baseNotes": ["Sandalwood", "Vanilla", "Musk"]
+    }
+  }
 ]

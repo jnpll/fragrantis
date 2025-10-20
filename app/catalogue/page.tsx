@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
@@ -62,7 +63,7 @@ export default function CataloguePage() {
             <p className="max-w-3xl text-muted-foreground">
               Browse signature perfumes from across the library. Each entry
               includes its key accords, note pyramid, and ideal wearing
-              occasions. Artwork slots are available for future bottle imagery.
+              occasions. Choose your next scent with confidence.
             </p>
           </div>
         </header>
@@ -71,11 +72,26 @@ export default function CataloguePage() {
           {sortedFragrances.map((fragrance) => (
             <Card key={`${fragrance.brand}-${fragrance.name}`}>
               <CardHeader className="gap-4">
-                <div className="aspect-[3/4] w-full overflow-hidden rounded-lg border border-dashed border-border/70 bg-muted">
-                  <div className="flex h-full items-center justify-center text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                    Image pending
+                {fragrance.imageUrl ? (
+                  <div className="relative aspect-3/4 w-full overflow-hidden bg-muted">
+                    <Image
+                      src={fragrance.imageUrl}
+                      alt={`${fragrance.name} by ${fragrance.brand}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      unoptimized
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div className="aspect-3/4 w-full overflow-hidden bg-muted">
+                    <div className="flex h-full items-center justify-center text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                      Image pending
+                    </div>
+                  </div>
+                )}
+              </CardHeader>
+              <CardContent className="space-y-5">
                 <div className="space-y-2">
                   <CardTitle className="text-xl">
                     {fragrance.name}
@@ -89,8 +105,6 @@ export default function CataloguePage() {
                     <span>{genderLabels[fragrance.gender]}</span>
                   </div>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-5">
                 <div className="space-y-3">
                   <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
                     Scent Profile
