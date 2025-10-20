@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-
 export type OlfactoryFamily = {
   id: number
   name: string
@@ -121,3 +118,351 @@ export const olfactory_accords: OlfactoryAccord[] = [
   
 ]
 
+export type Gender = "male" | "female" | "unisex"
+export type SuitableTime = "day" | "night"
+export type Season = "spring" | "summer" | "fall" | "winter"
+
+export type Fragrance = {
+  name: string
+  brand: string
+  concentration: string
+  gender: Gender
+  suitableTimes: SuitableTime[]
+  suitableSeasons: Season[]
+  notes: string[]
+  accords: {
+    main: string[]
+    sub: string[]
+  }
+  description: string
+  otherDetails: {
+    collection?: string
+    launchYear: number
+    fragranceFamily: string
+    topNotes: string[]
+    heartNotes: string[]
+    baseNotes: string[]
+  }
+}
+
+export const fragrances: Fragrance[] = [
+  {
+    name: "Oud Voyager",
+    brand: "Tom Ford",
+    concentration: "Eau de Parfum",
+    gender: "unisex",
+    suitableTimes: ["day", "night"],
+    suitableSeasons: ["spring", "fall", "winter"],
+    notes: ["Geranium", "Peony", "Oud", "Cypriol", "Osmanthus"],
+    accords: {
+      main: ["Floral", "Oud"],
+      sub: ["Woody", "Green", "WarmSpicy", "Amber"],
+    },
+    description:
+      "A journey where the past, present, and future unite ancient oud with futuristic florals in a warm, captivating embrace.",
+    otherDetails: {
+      collection: "Private Blend",
+      launchYear: 2025,
+      fragranceFamily: "Floral Woody Amber",
+      topNotes: ["Geranium"],
+      heartNotes: ["Peony", "Osmanthus"],
+      baseNotes: ["Oud", "Cypriol"],
+    },
+  },
+  {
+    name: "Y",
+    brand: "Yves Saint Laurent",
+    concentration: "Eau de Parfum",
+    gender: "male",
+    suitableTimes: ["day", "night"],
+    suitableSeasons: ["spring", "summer", "fall"],
+    notes: [
+      "Apple",
+      "Bergamot",
+      "Ginger",
+      "Sage",
+      "Tonka Bean",
+      "Cedarwood",
+    ],
+    accords: {
+      main: ["Aromatic", "Woody"],
+      sub: ["FreshSpicy", "Amber", "Sweet"],
+    },
+    description:
+      "The fragrance of creative, self-made men. A bold blend of freshness and strength combining lavender, geranium, and woody amber notes.",
+    otherDetails: {
+      launchYear: 2018,
+      fragranceFamily: "Aromatic Fougere",
+      topNotes: ["Apple", "Ginger", "Bergamot"],
+      heartNotes: ["Sage", "Juniper Berries", "Geranium"],
+      baseNotes: ["Cedarwood", "Tonka Bean", "Amberwood"],
+    },
+  },
+  {
+    name: "Acqua di Giò Profondo",
+    brand: "Giorgio Armani",
+    concentration: "Eau de Parfum",
+    gender: "male",
+    suitableTimes: ["day"],
+    suitableSeasons: ["spring", "summer"],
+    notes: ["Marine Notes", "Bergamot", "Rosemary", "Patchouli", "Cypress"],
+    accords: {
+      main: ["Marine", "Aromatic"],
+      sub: ["Woody", "FreshSpicy", "Mineral"],
+    },
+    description:
+      "A deep, aquatic interpretation of the iconic Acqua di Giò, blending marine notes with aromatic woods and mineral freshness.",
+    otherDetails: {
+      launchYear: 2020,
+      fragranceFamily: "Aromatic Aquatic",
+      topNotes: ["Marine Notes", "Bergamot"],
+      heartNotes: ["Rosemary", "Lavender", "Cypress"],
+      baseNotes: ["Patchouli", "Amber", "Musk"],
+    },
+  },
+  {
+    name: "Ultra Male",
+    brand: "Jean Paul Gaultier",
+    concentration: "Eau de Toilette",
+    gender: "male",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: [
+      "Pear",
+      "Lavender",
+      "Cinnamon",
+      "Vanilla",
+      "Amber",
+      "Patchouli",
+    ],
+    accords: {
+      main: ["Sweet", "WarmSpicy"],
+      sub: ["Amber", "Vanilla", "Fruity"],
+    },
+    description:
+      "An irresistible blend of juicy pear, warm spices, and sensual vanilla — a bold evolution of the original Le Male.",
+    otherDetails: {
+      launchYear: 2015,
+      fragranceFamily: "Amber Fougere",
+      topNotes: ["Pear", "Lavender", "Mint"],
+      heartNotes: ["Cinnamon", "Clary Sage", "Caraway"],
+      baseNotes: ["Vanilla", "Amber", "Patchouli"],
+    },
+  },
+  {
+    name: "Eros Flame",
+    brand: "Versace",
+    concentration: "Eau de Parfum",
+    gender: "male",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: [
+      "Mandarin",
+      "Black Pepper",
+      "Rosemary",
+      "Tonka Bean",
+      "Cedar",
+    ],
+    accords: {
+      main: ["WarmSpicy", "Citrus"],
+      sub: ["Woody", "Amber", "Sweet"],
+    },
+    description:
+      "A passionate, fiery fragrance that blends citrus brightness with spicy, woody depth — the scent of love in flames.",
+    otherDetails: {
+      launchYear: 2018,
+      fragranceFamily: "Woody Spicy",
+      topNotes: ["Mandarin", "Black Pepper", "Lemon"],
+      heartNotes: ["Rosemary", "Geranium", "Pepperwood"],
+      baseNotes: ["Tonka Bean", "Cedar", "Vanilla"],
+    },
+  },
+  {
+    name: "Terre d’Hermès",
+    brand: "Hermès",
+    concentration: "Eau de Toilette",
+    gender: "male",
+    suitableTimes: ["day"],
+    suitableSeasons: ["spring", "fall"],
+    notes: ["Orange", "Vetiver", "Cedar", "Pepper", "Patchouli"],
+    accords: {
+      main: ["Woody", "Earthy"],
+      sub: ["Citrus", "DryWood", "Mineral"],
+    },
+    description:
+      "An ode to the elements — earthy vetiver and dry woods grounded by sparkling orange zest.",
+    otherDetails: {
+      launchYear: 2006,
+      fragranceFamily: "Woody Spicy",
+      topNotes: ["Orange", "Grapefruit"],
+      heartNotes: ["Pepper", "Pelargonium", "Flint"],
+      baseNotes: ["Vetiver", "Cedar", "Patchouli"],
+    },
+  },
+  {
+    name: "MYSLF",
+    brand: "Yves Saint Laurent",
+    concentration: "Eau de Parfum",
+    gender: "male",
+    suitableTimes: ["day", "night"],
+    suitableSeasons: ["spring", "summer", "fall"],
+    notes: ["Bergamot", "Orange Blossom", "Ambrofix", "Patchouli"],
+    accords: {
+      main: ["Aromatic", "Woody"],
+      sub: ["Amber", "Citrus", "Clean"],
+    },
+    description:
+      "A statement of modern masculinity — the contrast of bright citrus, smooth florals, and warm woods.",
+    otherDetails: {
+      launchYear: 2023,
+      fragranceFamily: "Woody Floral",
+      topNotes: ["Bergamot"],
+      heartNotes: ["Orange Blossom"],
+      baseNotes: ["Ambrofix", "Patchouli"],
+    },
+  },
+  {
+    name: "1 Million",
+    brand: "Paco Rabanne",
+    concentration: "Eau de Toilette",
+    gender: "male",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: ["Cinnamon", "Leather", "Amber", "Blood Mandarin", "Rose"],
+    accords: {
+      main: ["WarmSpicy", "Leather"],
+      sub: ["Amber", "Sweet", "Citrus"],
+    },
+    description:
+      "A flamboyant scent of wealth and power — spicy leather wrapped in amber sweetness and citrus sparkle.",
+    otherDetails: {
+      launchYear: 2008,
+      fragranceFamily: "Woody Spicy",
+      topNotes: ["Blood Mandarin", "Grapefruit"],
+      heartNotes: ["Cinnamon", "Rose", "Spice"],
+      baseNotes: ["Leather", "Amber", "Patchouli"],
+    },
+  },
+  {
+    name: "The One for Men",
+    brand: "Dolce & Gabbana",
+    concentration: "Eau de Parfum",
+    gender: "male",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: ["Grapefruit", "Ginger", "Cardamom", "Tobacco", "Amber"],
+    accords: {
+      main: ["WarmSpicy", "Amber"],
+      sub: ["Woody", "Sweet", "Tobacco"],
+    },
+    description:
+      "A sophisticated balance of spices and warm tobacco, radiating timeless masculine elegance.",
+    otherDetails: {
+      launchYear: 2015,
+      fragranceFamily: "Woody Spicy",
+      topNotes: ["Grapefruit", "Coriander", "Basil"],
+      heartNotes: ["Cardamom", "Ginger"],
+      baseNotes: ["Tobacco", "Amber", "Cedar"],
+    },
+  },
+  {
+    name: "Gaultier Divine Elixir",
+    brand: "Jean Paul Gaultier",
+    concentration: "Eau de Parfum Elixir",
+    gender: "female",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: [
+      "Orange Blossom",
+      "Jasmine",
+      "Honey",
+      "Tonka Bean",
+      "Patchouli",
+    ],
+    accords: {
+      main: ["WhiteFloral", "Sweet"],
+      sub: ["Amber", "Vanilla", "WarmSpicy"],
+    },
+    description:
+      "An elixir of divine femininity — luminous white florals coated in honeyed sweetness and warm amber.",
+    otherDetails: {
+      launchYear: 2024,
+      fragranceFamily: "Amber Floral",
+      topNotes: ["Orange Blossom"],
+      heartNotes: ["Jasmine", "Honey"],
+      baseNotes: ["Tonka Bean", "Patchouli"],
+    },
+  },
+  {
+    name: "Libre",
+    brand: "Yves Saint Laurent",
+    concentration: "Eau de Parfum",
+    gender: "female",
+    suitableTimes: ["day", "night"],
+    suitableSeasons: ["spring", "fall", "winter"],
+    notes: [
+      "Lavender",
+      "Orange Blossom",
+      "Vanilla",
+      "Tonka Bean",
+      "Ambergris",
+    ],
+    accords: {
+      main: ["WhiteFloral", "Amber"],
+      sub: ["Vanilla", "Aromatic", "Sweet"],
+    },
+    description:
+      "Freedom in a bottle — the tension between masculine lavender and feminine orange blossom wrapped in sensual amber.",
+    otherDetails: {
+      launchYear: 2019,
+      fragranceFamily: "Amber Fougere",
+      topNotes: ["Mandarin", "Lavender"],
+      heartNotes: ["Orange Blossom", "Jasmine"],
+      baseNotes: ["Vanilla", "Tonka Bean", "Ambergris"],
+    },
+  },
+  {
+    name: "Good Girl Blush Elixir",
+    brand: "Carolina Herrera",
+    concentration: "Eau de Parfum Elixir",
+    gender: "female",
+    suitableTimes: ["night"],
+    suitableSeasons: ["spring", "fall"],
+    notes: ["Ylang-Ylang", "Rose", "Vanilla", "Tonka Bean", "Patchouli"],
+    accords: {
+      main: ["Floral", "Sweet"],
+      sub: ["Vanilla", "Amber", "WarmSpicy"],
+    },
+    description:
+      "A sensual re-imagining of Good Girl — creamy florals and glowing vanilla enriched with the intensity of an elixir.",
+    otherDetails: {
+      launchYear: 2023,
+      fragranceFamily: "Amber Floral",
+      topNotes: ["Ylang-Ylang"],
+      heartNotes: ["Rose"],
+      baseNotes: ["Vanilla", "Tonka Bean", "Patchouli"],
+    },
+  },
+  {
+    name: "La Nuit de l’Homme",
+    brand: "Yves Saint Laurent",
+    concentration: "Eau de Toilette",
+    gender: "male",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: ["Cardamom", "Lavender", "Cedar", "Vetiver", "Coumarin"],
+    accords: {
+      main: ["WarmSpicy", "Woody"],
+      sub: ["Aromatic", "Amber", "Sweet"],
+    },
+    description:
+      "Seductive and mysterious, La Nuit de l’Homme blends cardamom spice and creamy woods for irresistible allure.",
+    otherDetails: {
+      launchYear: 2009,
+      fragranceFamily: "Woody Spicy",
+      topNotes: ["Cardamom"],
+      heartNotes: ["Lavender", "Cedar"],
+      baseNotes: ["Vetiver", "Coumarin"],
+    },
+  },
+]

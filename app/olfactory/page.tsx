@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import {
   olfactory_accords,
@@ -5,6 +6,10 @@ import {
   type OlfactoryAccord,
   type OlfactoryFamily,
 } from "@/lib/temp-data"
+import {
+  formatAccordName,
+  getAccordTextColor,
+} from "@/lib/accord-utils"
 
 const familiesWithAccords = olfactory_families
   .slice()
@@ -16,31 +21,41 @@ const familiesWithAccords = olfactory_families
     ),
   }))
 
-const getAccordTextColor = (color: string) => {
-  const lightnessMatch = color.match(/oklch\(([\d.]+)%?/)
-  const lightness = lightnessMatch ? Number.parseFloat(lightnessMatch[1]) : 60
-  return lightness > 70 ? "oklch(0.145 0 0)" : "oklch(0.985 0 0)"
-}
-
-const formatAccordName = (name: string) =>
-  name.replace(/([a-z])([A-Z])/g, "$1 $2")
-
-export default function MasterListPage() {
+export default function OlfactoryPage() {
   return (
     <div className="min-h-screen w-full bg-background text-foreground">
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-16 sm:px-10 lg:px-16">
         <header className="space-y-4">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-foreground"
+                >
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true" className="select-none">
+                /
+              </li>
+              <li aria-current="page" className="font-medium text-foreground">
+                Olfactory
+              </li>
+            </ol>
+          </nav>
           <p className="text-sm uppercase tracking-[0.4em] text-muted-foreground">
-            Olfactory Catalogue
+            Olfactory Families
           </p>
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Master List
+            Explore every family and accord in the library
           </h1>
-          <p className="max-w-3xl text-muted-foreground">
-            Explore every family and accord in the library. Each accord is
-            represented with its signature OKLCH swatch pulled from the shadcn
-            palette.
-          </p>
+            <p className="max-w-3xl text-muted-foreground">
+            Understand how each family contributes to a fragrance, from airy
+            fresh compositions to deep resinous blends. Each accord within these 
+            families tells its own story, creating the complex symphony of 
+            scents that define modern perfumery.
+            </p>
         </header>
 
         <section className="space-y-10">
