@@ -384,7 +384,7 @@ export const fragrances: Fragrance[] = [
     },
   },
   {
-    name: "Gaultier Divine Elixir",
+    name: "Divine Elixir",
     brand: "Jean Paul Gaultier",
     imageUrl: "https://i.ibb.co/nqbDtVbm/jean-paul-gaultier-gaultier-divine-elixir.webp",
     concentration: "Parfum",
@@ -485,15 +485,15 @@ export const fragrances: Fragrance[] = [
       baseNotes: ["Vetiver", "Coumarin"],
     },
   },
-  { 
-    "name": "Virgin Island Water",
-    "brand": "Creed",
-    "imageUrl": "https://i.ibb.co/1Ghfw4Cr/creed-virgin-island-water.jpg",
-    "concentration": "Eau de Parfum",
-    "gender": "unisex",
-    "suitableTimes": ["day"],
-    "suitableSeasons": ["spring", "summer"],
-    "notes": [
+  {
+    name: "Virgin Island Water",
+    brand: "Creed",
+    imageUrl: "https://i.ibb.co/1Ghfw4Cr/creed-virgin-island-water.jpg",
+    concentration: "Eau de Parfum",
+    gender: "unisex",
+    suitableTimes: ["day"],
+    suitableSeasons: ["spring", "summer"],
+    notes: [
       "Coconut",
       "Lime",
       "Bergamot",
@@ -501,46 +501,48 @@ export const fragrances: Fragrance[] = [
       "White Rum",
       "Sugar Cane"
     ],
-    "accords": {
-      "main": ["Citrus", "Sweet"],
-      "sub": ["Coconut", "FreshSpicy", "Woody", "Marine"]
+    accords: {
+      main: ["Citrus", "Sweet"],
+      sub: ["Coconut", "FreshSpicy", "Woody", "Marine"]
     },
-    "description": "A tropical escape bottled — the scent of lime, coconut, and white rum carried on a warm sea breeze. Inspired by sailing through the Caribbean waters.",
-    "otherDetails": {
-      "launchYear": 2007,
-      "fragranceFamily": "Citrus Gourmand",
-      "topNotes": ["Lime", "Bergamot", "Mandarin"],
-      "heartNotes": ["Coconut", "Ylang-Ylang", "Jasmine"],
-      "baseNotes": ["White Rum", "Sugar Cane", "Musk"]
+    description:
+      "A tropical escape bottled — the scent of lime, coconut, and white rum carried on a warm sea breeze. Inspired by sailing through the Caribbean waters.",
+    otherDetails: {
+      launchYear: 2007,
+      fragranceFamily: "Citrus Gourmand",
+      topNotes: ["Lime", "Bergamot", "Mandarin"],
+      heartNotes: ["Coconut", "Ylang-Ylang", "Jasmine"],
+      baseNotes: ["White Rum", "Sugar Cane", "Musk"]
     }
   },
   {
-    "name": "Boss Bottled Absolu",
-    "brand": "Hugo Boss",
+    name: "Bottled Absolu",
+    brand: "Hugo Boss",
     imageUrl: "https://i.ibb.co/R4J30j1m/hugo-boss-bottled-absolu.jpg",
-    "concentration": "Eau de Parfum",
-    "gender": "male", // Male
-    "suitableTimes": ["night"], // Night
-    "suitableSeasons": ["fall", "winter"], // Fall, Winter
-    "notes": [
-      "Apple",
-      "Cinnamon",
-      "Cardamom",
-      "Sandalwood",
-      "Vanilla",
-      "Musk"
+    concentration: "Parfum Intense",
+    gender: "male",
+    suitableTimes: ["night"],
+    suitableSeasons: ["fall", "winter"],
+    notes: [
+      "Incense",
+      "Leather",
+      "Patchouli",
+      "Myrrh",
+      "Cedarwood",
+      "Davana"
     ],
-    "accords": {
-      "main": ["WarmSpicy", "Sweet"],
-      "sub": ["Woody", "Vanilla", "Amber", "Fruity"]
+    accords: {
+      main: ["Smoky", "Leather"],
+      sub: ["Amber", "Woody", "Resinous", "Balsamic"]
     },
-    "description": "A richer, more intense expression of the iconic Boss Bottled DNA. Crisp apple and warm cinnamon blend with deep woods and vanilla for timeless masculine sophistication.",
-    "otherDetails": {
-      "launchYear": 2019,
-      "fragranceFamily": "Woody Spicy",
-      "topNotes": ["Apple", "Cardamom"],
-      "heartNotes": ["Cinnamon", "Sage"],
-      "baseNotes": ["Sandalwood", "Vanilla", "Musk"]
+    description:
+      "A bold and refined interpretation of the Boss Bottled signature. Dark incense and myrrh fuse with smooth leather and woody patchouli to evoke depth, warmth, and timeless masculinity.",
+    otherDetails: {
+      launchYear: 2019,
+      fragranceFamily: "Amber Woody",
+      topNotes: ["Incense", "Leather"],
+      heartNotes: ["Patchouli", "Myrrh"],
+      baseNotes: ["Cedarwood", "Davana"]
     }
   }
 ]

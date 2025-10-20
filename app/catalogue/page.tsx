@@ -1,20 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 
-import { Badge } from "@/components/ui/badge"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
-  type Gender,
-  olfactory_accords,
-  fragrances,
-} from "@/lib/temp-data"
-import { formatAccordName, getAccordTextColor } from "@/lib/accord-utils"
+import { FragranceCard } from "@/components/catalogue/fragrance-card"
+import { type Gender, fragrances, olfactory_accords } from "@/lib/temp-data"
 
 const genderLabels: Record<Gender, string> = {
   male: "Masculine",
@@ -70,84 +57,12 @@ export default function CataloguePage() {
 
         <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {sortedFragrances.map((fragrance) => (
-            <Card key={`${fragrance.brand}-${fragrance.name}`}>
-              <CardHeader className="gap-4">
-                {fragrance.imageUrl ? (
-                  <div className="relative aspect-3/4 w-full overflow-hidden bg-muted">
-                    <Image
-                      src={fragrance.imageUrl}
-                      alt={`${fragrance.name} by ${fragrance.brand}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      unoptimized
-                    />
-                  </div>
-                ) : (
-                  <div className="aspect-3/4 w-full overflow-hidden bg-muted">
-                    <div className="flex h-full items-center justify-center text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                      Image pending
-                    </div>
-                  </div>
-                )}
-              </CardHeader>
-              <CardContent className="space-y-5">
-                <div className="space-y-2">
-                  <CardTitle className="text-xl">
-                    {fragrance.name}
-                  </CardTitle>
-                  <CardDescription className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground/80">
-                    {fragrance.brand}
-                  </CardDescription>
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-                    <span>{fragrance.concentration}</span>
-                    <span aria-hidden="true">•</span>
-                    <span>{genderLabels[fragrance.gender]}</span>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                    Scent Profile
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {fragrance.accords.main.map((accord) => (
-                      <Badge
-                        key={`main-${accord}`}
-                        style={{
-                          backgroundColor: accordColorMap.get(accord),
-                          color: getAccordTextColor(accordColorMap.get(accord)),
-                          borderColor: "transparent",
-                        }}
-                      >
-                        {formatAccordName(accord)}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <p className="text-xs text-muted-foreground">
-                    {fragrance.notes.join(" · ")}
-                  </p>
-                </div>
-
-                <p className="text-sm text-muted-foreground italic">
-                  {fragrance.description}
-                </p>
-
-                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                  <span>Launched {fragrance.otherDetails.launchYear}</span>
-                  <span aria-hidden="true">•</span>
-                  <span>{fragrance.otherDetails.fragranceFamily}</span>
-                  {fragrance.otherDetails.collection && (
-                    <>
-                      <span aria-hidden="true">•</span>
-                      <span>{fragrance.otherDetails.collection}</span>
-                    </>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            <FragranceCard
+              key={`${fragrance.brand}-${fragrance.name}`}
+              fragrance={fragrance}
+              accordColorMap={accordColorMap}
+              genderLabel={genderLabels[fragrance.gender]}
+            />
           ))}
         </section>
       </main>
