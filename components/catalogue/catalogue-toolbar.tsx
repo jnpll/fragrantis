@@ -1,6 +1,7 @@
 "use client";
 
 import { FiltersPanel } from "@/components/catalogue/filters-panel";
+import { FilterTag } from "@/components/catalogue/filter-tag";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -22,20 +23,40 @@ export function CatalogueToolbar({
   resultsCount,
   className,
 }: CatalogueToolbarProps) {
+  const { selections, genderLabels } = filtersProps;
+
+  const activeFilters = [
+    ...selections.families.map((family) => ({
+      key: `family-${family}`,
+      label: family,
+      onRemove: () => filtersProps.onToggleFamily(family),
+    })),
+    ...selections.accords.map((accord) => ({
+      key: `accord-${accord}`,
+      label: accord,
+      onRemove: () => filtersProps.onToggleAccord(accord),
+    })),
+    ...selections.genders.map((gender) => ({
+      key: `gender-${gender}`,
+      label: genderLabels[gender] ?? gender,
+      onRemove: () => filtersProps.onToggleGender(gender),
+    })),
+    ...selections.brands.map((brand) => ({
+      key: `brand-${brand}`,
+      label: brand,
+      onRemove: () => filtersProps.onToggleBrand(brand),
+    })),
+  ];
+
   return (
-    <div
-      className={cn(
-        "sticky top-16 z-40 w-full border-b border-border/60 bg-card/60 backdrop-blur supports-backdrop-filter:bg-background/80",
-        className,
-      )}
-    >
-      <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="flex flex-col gap-3 pt-8 pb-4 md:flex-row md:items-center md:justify-between">
+    <div className={cn("sticky top-16 z-40 w-full", className)}>
+      <div className="w-full bg-card ">
+        <div className="flex flex-col mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 gap-8 pt-8 pb-4 md:flex-row md:items-center md:justify-between">
           <Sheet>
             <SheetTrigger asChild>
               <Button
                 variant="link"
-                className="flex items-center gap-2 has-[>svg]:px-0 py-2 text-xs font-medium uppercase tracking-widest"
+                className="flex items-center gap-2 has-[>svg]:px-0 py-2 text-xs font-medium uppercase tracking-[0.3em]"
               >
                 Filter &amp; Sort
                 <IconChevronDown className="size-4" />
@@ -70,6 +91,19 @@ export function CatalogueToolbar({
           </div>
         </div>
       </div>
+      {activeFilters.length > 0 ? (
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 py-4 backdrop-blur supports-backdrop-filter:bg-background/80">
+          <div className="flex flex-wrap gap-2">
+            {activeFilters.map((filter) => (
+              <FilterTag
+                key={filter.key}
+                label={filter.label}
+                onRemove={filter.onRemove}
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
