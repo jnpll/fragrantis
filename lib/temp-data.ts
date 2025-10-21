@@ -544,5 +544,35 @@ export const fragrances: Fragrance[] = [
       heartNotes: ["Patchouli", "Myrrh"],
       baseNotes: ["Cedarwood", "Davana"]
     }
+  },
+  {
+    name: 'Neroli Portofino',
+    brand: 'Tom Ford',
+    concentration: 'Eau de Parfum',
+    gender: 'unisex',
+    suitableTimes: ['day'],
+    suitableSeasons: ['spring', 'summer'],
+    notes: [
+      'Neroli',
+      'Bergamot',
+      'Mandarin',
+      'Orange Blossom',
+      'Amber',
+      'Musk'
+    ],
+    accords: {
+      main: ['Citrus', 'Aromatic'],
+      sub: ['WhiteFloral', 'FreshSpicy', 'Amber', 'Clean']
+    },
+    description:
+      'An effervescent citrus-aromatic blend inspired by the sparkling waters and sunlit breezes of the Italian Riviera. ',
+    otherDetails: {
+      collection: 'Private Blend',
+      launchYear: 2011,
+      fragranceFamily: 'Citrus Aromatic',
+      topNotes: ['Bergamot', 'Mandarin', 'Lemon', 'Neroli'],
+      heartNotes: ['Orange Blossom', 'Rosemary', 'Lavender'],
+      baseNotes: ['Amber', 'Musk', 'Angelica']
+    }
   }
 ]
