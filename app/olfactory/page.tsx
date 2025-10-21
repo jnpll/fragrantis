@@ -1,15 +1,12 @@
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import {
   olfactory_accords,
   olfactory_families,
   type OlfactoryAccord,
   type OlfactoryFamily,
-} from "@/lib/temp-data"
-import {
-  formatAccordName,
-  getAccordTextColor,
-} from "@/lib/accord-utils"
+} from "@/lib/temp-data";
+import { formatAccordName, getAccordTextColor } from "@/lib/accord-utils";
 
 const familiesWithAccords = olfactory_families
   .slice()
@@ -17,9 +14,9 @@ const familiesWithAccords = olfactory_families
   .map((family: OlfactoryFamily) => ({
     ...family,
     accords: olfactory_accords.filter(
-      (accord: OlfactoryAccord) => accord.familyId === family.id
+      (accord: OlfactoryAccord) => accord.familyId === family.id,
     ),
-  }))
+  }));
 
 export default function OlfactoryPage() {
   return (
@@ -50,12 +47,12 @@ export default function OlfactoryPage() {
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Explore every family and accord in the library
           </h1>
-            <p className="max-w-3xl text-muted-foreground">
+          <p className="max-w-3xl text-muted-foreground">
             Understand how each family contributes to a fragrance, from airy
-            fresh compositions to deep resinous blends. Each accord within these 
-            families tells its own story, creating the complex symphony of 
+            fresh compositions to deep resinous blends. Each accord within these
+            families tells its own story, creating the complex symphony of
             scents that define modern perfumery.
-            </p>
+          </p>
         </header>
 
         <section className="space-y-10">
@@ -91,5 +88,5 @@ export default function OlfactoryPage() {
         </section>
       </main>
     </div>
-  )
+  );
 }

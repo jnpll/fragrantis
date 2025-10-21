@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useMemo, useRef, useState } from "react";
+
 import { FiltersPanel } from "@/components/catalogue/filters-panel";
 import { FilterTag } from "@/components/catalogue/filter-tag";
 import { Button } from "@/components/ui/button";
@@ -24,32 +26,82 @@ export function CatalogueToolbar({
   className,
 }: CatalogueToolbarProps) {
   const { selections, genderLabels } = filtersProps;
+  const [showTags, setShowTags] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
+  const toolbarRef = useRef<HTMLDivElement | null>(null);
 
-  const activeFilters = [
-    ...selections.families.map((family) => ({
-      key: `family-${family}`,
-      label: family,
-      onRemove: () => filtersProps.onToggleFamily(family),
-    })),
-    ...selections.accords.map((accord) => ({
-      key: `accord-${accord}`,
-      label: accord,
-      onRemove: () => filtersProps.onToggleAccord(accord),
-    })),
-    ...selections.genders.map((gender) => ({
-      key: `gender-${gender}`,
-      label: genderLabels[gender] ?? gender,
-      onRemove: () => filtersProps.onToggleGender(gender),
-    })),
-    ...selections.brands.map((brand) => ({
-      key: `brand-${brand}`,
-      label: brand,
-      onRemove: () => filtersProps.onToggleBrand(brand),
-    })),
-  ];
+  useEffect(() => {
+    const updateStickyState = () => {
+      const toolbarEl = toolbarRef.current;
+      if (!toolbarEl) {
+        setIsSticky(false);
+        return;
+      }
+
+      const computedTop = parseFloat(
+        window.getComputedStyle(toolbarEl).top || "0",
+      );
+      const offset = Number.isNaN(computedTop) ? 0 : computedTop;
+      const { top } = toolbarEl.getBoundingClientRect();
+      setIsSticky(top <= offset);
+    };
+
+    updateStickyState();
+    window.addEventListener("scroll", updateStickyState, { passive: true });
+    window.addEventListener("resize", updateStickyState);
+
+    return () => {
+      window.removeEventListener("scroll", updateStickyState);
+      window.removeEventListener("resize", updateStickyState);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isSticky) {
+      setShowTags(true);
+    }
+  }, [isSticky]);
+
+  const activeFilters = useMemo(
+    () => [
+      ...selections.families.map((family) => ({
+        key: `family-${family}`,
+        label: family,
+        onRemove: () => filtersProps.onToggleFamily(family),
+      })),
+      ...selections.accords.map((accord) => ({
+        key: `accord-${accord}`,
+        label: accord,
+        onRemove: () => filtersProps.onToggleAccord(accord),
+      })),
+      ...selections.genders.map((gender) => ({
+        key: `gender-${gender}`,
+        label: genderLabels[gender] ?? gender,
+        onRemove: () => filtersProps.onToggleGender(gender),
+      })),
+      ...selections.brands.map((brand) => ({
+        key: `brand-${brand}`,
+        label: brand,
+        onRemove: () => filtersProps.onToggleBrand(brand),
+      })),
+    ],
+    [
+      filtersProps,
+      genderLabels,
+      selections.accords,
+      selections.brands,
+      selections.families,
+      selections.genders,
+    ],
+  );
+
+  const hasActiveFilters = activeFilters.length > 0;
 
   return (
-    <div className={cn("sticky top-16 z-40 w-full", className)}>
+    <div
+      ref={toolbarRef}
+      className={cn("sticky top-16 z-40 w-full", className)}
+    >
       <div className="w-full bg-card">
         <div className="flex flex-col mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 gap-8 pt-8 pb-4 md:flex-row md:items-center md:justify-between">
           <Sheet>
@@ -91,9 +143,17 @@ export function CatalogueToolbar({
           </div>
         </div>
       </div>
-      {activeFilters.length > 0 ? (
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 py-4 backdrop-blur supports-backdrop-filter:bg-background/80">
-          <div className="flex flex-wrap gap-2">
+      {hasActiveFilters ? (
+        <div className="relative mx-auto max-w-7xl px-6 backdrop-blur supports-backdrop-filter:bg-background/80 sm:px-10 lg:px-16">
+          <div
+            id="catalogue-active-filters"
+            className={cn(
+              "flex flex-wrap gap-2 overflow-hidden transition-all duration-300 ease-in-out",
+              showTags
+                ? "max-h-52 opacity-100 py-4"
+                : "pointer-events-none max-h-0 opacity-0 py-0",
+            )}
+          >
             {activeFilters.map((filter) => (
               <FilterTag
                 key={filter.key}
@@ -102,6 +162,27 @@ export function CatalogueToolbar({
               />
             ))}
           </div>
+          {isSticky ? (
+            <Button
+              type="button"
+              size="icon"
+              variant="outline"
+              onClick={() => setShowTags((prev) => !prev)}
+              aria-expanded={showTags}
+              aria-controls="catalogue-active-filters"
+              className="absolute right-6 top-full -translate-y-1/2 rounded-full border-border/60 bg-background shadow-sm transition-transform sm:right-10 lg:right-16"
+            >
+              <IconChevronDown
+                className={cn(
+                  "transition-transform duration-300",
+                  showTags ? "rotate-180" : "rotate-0",
+                )}
+              />
+              <span className="sr-only">
+                {showTags ? "Hide active filters" : "Show active filters"}
+              </span>
+            </Button>
+          ) : null}
         </div>
       ) : null}
     </div>
