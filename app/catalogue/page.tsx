@@ -158,7 +158,7 @@ export default function CataloguePage() {
         className="fixed left-6 top-28 hidden w-64 xl:block"
         {...filtersProps}
       />
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-6 py-16 sm:px-10 lg:px-16">
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-6 py-16 sm:px-10 lg:px-16">
         <header className="space-y-6">
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">

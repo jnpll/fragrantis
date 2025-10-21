@@ -93,17 +93,11 @@ export function FragranceCard({
         )}
       </CardHeader>
       <CardContent className="flex flex-1 flex-col space-y-5">
-        <div id="fragrance-header" className="space-y-1">
+        <div id="fragrance-title" className="space-y-1">
           <CardTitle className="text-xl">{fragrance.name}</CardTitle>
           <CardDescription className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground/80">
             {fragrance.brand}
           </CardDescription>
-        </div>
-
-        <div id="fragrance-details" className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-          <span>{fragrance.intensity}</span>
-          <span aria-hidden="true">•</span>
-          <span>{genderLabel}</span>
         </div>
 
         <div id="fragrance-scent-profile" className="space-y-2">
@@ -136,13 +130,9 @@ export function FragranceCard({
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>{fragrance.otherDetails.launchYear}</span>
           <span aria-hidden="true">•</span>
-          <span>{fragrance.otherDetails.perfumer}</span>
-          {fragrance.otherDetails.collection && (
-            <>
-              <span aria-hidden="true">•</span>
-              <span>{fragrance.otherDetails.collection}</span>
-            </>
-          )}
+          <span>{fragrance.intensity}</span>
+          <span aria-hidden="true">•</span>
+          <span>{genderLabel}</span>
         </div>
       </CardFooter>
     </Card>

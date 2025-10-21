@@ -134,7 +134,7 @@ export type Fragrance = {
   name: string
   brand: string
   imageUrl?: string
-  concentration: string
+  intensity: string
   gender: Gender
   suitableTimes: SuitableTime[]
   suitableSeasons: Season[]
@@ -146,8 +146,9 @@ export type Fragrance = {
   description: string
   otherDetails: {
     collection?: string
+    manufacturerDescription: string
+    perfumer: string
     launchYear: number
-    fragranceFamily: string
     topNotes: string[]
     heartNotes: string[]
     baseNotes: string[]
@@ -159,7 +160,7 @@ export const fragrances: Fragrance[] = [
     name: "Oud Voyager",
     brand: "Tom Ford",
     imageUrl: "https://i.ibb.co/PZPnTZCN/tom-ford-oud-voyager.jpg",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "unisex",
     suitableTimes: ["day", "night"],
     suitableSeasons: ["spring", "fall", "winter"],
@@ -173,17 +174,19 @@ export const fragrances: Fragrance[] = [
     otherDetails: {
       collection: "Private Blend",
       launchYear: 2025,
-      fragranceFamily: "Floral Woody",
+      manufacturerDescription:
+        "Tom Ford's futuristic florals meet ancient oud in an opulent Private Blend release, crafted with exacting attention to ingredient sourcing and blending finesse.",
+      perfumer: "Antoine Maisondieu",
       topNotes: ["Geranium"],
       heartNotes: ["Peony", "Osmanthus"],
       baseNotes: ["Oud", "Cypriol"],
     },
   },
   {
-    name: "Y",
+    name: "Y Eau de Parfum",
     brand: "Yves Saint Laurent",
     imageUrl: "https://i.ibb.co/Cpc31JjR/ysl-y-edp-1.jpg",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day", "night"],
     suitableSeasons: ["spring", "summer", "fall"],
@@ -203,7 +206,9 @@ export const fragrances: Fragrance[] = [
       "The fragrance of creative, self-made men. A bold blend of freshness and strength combining lavender, geranium, and woody amber notes.",
     otherDetails: {
       launchYear: 2018,
-      fragranceFamily: "Aromatic Fougere",
+      manufacturerDescription:
+        "YSL Beauty's olfactory anthem for self-made visionaries—engineered with precision distillation to balance vibrant freshness and addictive depth.",
+      perfumer: "Dominique Ropion",
       topNotes: ["Apple", "Ginger", "Bergamot"],
       heartNotes: ["Sage", "Juniper Berries", "Geranium"],
       baseNotes: ["Cedarwood", "Tonka Bean", "Amberwood"],
@@ -213,7 +218,7 @@ export const fragrances: Fragrance[] = [
     name: "Acqua di Giò Profondo",
     brand: "Giorgio Armani",
     imageUrl: "https://i.ibb.co/0Vzpry7y/giorgio-armani-acqua-di-gio-profondo.webp",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day"],
     suitableSeasons: ["spring", "summer"],
@@ -226,7 +231,9 @@ export const fragrances: Fragrance[] = [
       "A deep, aquatic interpretation of the iconic Acqua di Giò, blending marine notes with aromatic woods and mineral freshness.",
     otherDetails: {
       launchYear: 2020,
-      fragranceFamily: "Aromatic Aquatic",
+      manufacturerDescription:
+        "Giorgio Armani Profumo Laboratories' marine-aromatic signature, bottling chromed citrus and deep woods in a refined, pressure-distilled concentrate.",
+      perfumer: "Alberto Morillas",
       topNotes: ["Marine Notes", "Bergamot"],
       heartNotes: ["Rosemary", "Lavender", "Cypress"],
       baseNotes: ["Patchouli", "Amber", "Musk"],
@@ -236,7 +243,7 @@ export const fragrances: Fragrance[] = [
     name: "Ultra Male",
     brand: "Jean Paul Gaultier",
     imageUrl: "https://i.ibb.co/mV490g8y/jean-paul-gaultier-ultra-male.jpg",
-    concentration: "Eau de Toilette Intense",
+    intensity: "Eau de Toilette Intense",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -256,7 +263,9 @@ export const fragrances: Fragrance[] = [
       "An irresistible blend of juicy pear, warm spices, and sensual vanilla — a bold evolution of the original Le Male.",
     otherDetails: {
       launchYear: 2015,
-      fragranceFamily: "Amber Fougere",
+      manufacturerDescription:
+        "Atelier Jean Paul Gaultier's intense fougère elixir, macerated for heightened sweetness and spice to deliver night-ready impact.",
+      perfumer: "Francis Kurkdjian",
       topNotes: ["Pear", "Lavender", "Mint"],
       heartNotes: ["Cinnamon", "Clary Sage", "Caraway"],
       baseNotes: ["Vanilla", "Amber", "Patchouli"],
@@ -266,7 +275,7 @@ export const fragrances: Fragrance[] = [
     name: "Eros Flame",
     brand: "Versace",
     imageUrl: "https://i.ibb.co/TMYQLjnm/versace-eros-flame.webp",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -285,7 +294,9 @@ export const fragrances: Fragrance[] = [
       "A passionate, fiery fragrance that blends citrus brightness with spicy, woody depth — the scent of love in flames.",
     otherDetails: {
       launchYear: 2018,
-      fragranceFamily: "Woody Spicy",
+      manufacturerDescription:
+        "Versace's Milan atelier combines fiery Mediterranean citrus with precision-extracted woods to ignite a bold, long-lasting aura.",
+      perfumer: "Olivier Pescheux",
       topNotes: ["Mandarin", "Black Pepper", "Lemon"],
       heartNotes: ["Rosemary", "Geranium", "Pepperwood"],
       baseNotes: ["Tonka Bean", "Cedar", "Vanilla"],
@@ -295,7 +306,7 @@ export const fragrances: Fragrance[] = [
     name: "Terre d’Hermès",
     brand: "Hermès",
     imageUrl: "https://i.ibb.co/3VwPHYv/hermes-terre-d-hermes.jpg",
-    concentration: "Eau de Toilette",
+    intensity: "Eau de Toilette",
     gender: "male",
     suitableTimes: ["day"],
     suitableSeasons: ["spring", "fall"],
@@ -308,7 +319,9 @@ export const fragrances: Fragrance[] = [
       "An ode to the elements — earthy vetiver and dry woods grounded by sparkling orange zest.",
     otherDetails: {
       launchYear: 2006,
-      fragranceFamily: "Woody Spicy",
+      manufacturerDescription:
+        "Hermès' parfumier workshop distills mineral citrus and refined vetiver through a patient maceration process celebrating earth and sky.",
+      perfumer: "Jean-Claude Ellena",
       topNotes: ["Orange", "Grapefruit"],
       heartNotes: ["Pepper", "Pelargonium", "Flint"],
       baseNotes: ["Vetiver", "Cedar", "Patchouli"],
@@ -318,7 +331,7 @@ export const fragrances: Fragrance[] = [
     name: "MYSLF",
     brand: "Yves Saint Laurent",
     imageUrl: "https://i.ibb.co/5gshsXm8/ysl-myslf.webp",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day", "night"],
     suitableSeasons: ["spring", "summer", "fall"],
@@ -331,7 +344,9 @@ export const fragrances: Fragrance[] = [
       "A statement of modern masculinity — the contrast of bright citrus, smooth florals, and warm woods.",
     otherDetails: {
       launchYear: 2023,
-      fragranceFamily: "Woody Floral",
+      manufacturerDescription:
+        "YSL Beauty's neo-modern statement, blending couture orange blossom and abstract woods in a high-tech aroma fusion process.",
+      perfumer: "Daniela Andrier",
       topNotes: ["Bergamot"],
       heartNotes: ["Orange Blossom"],
       baseNotes: ["Ambrofix", "Patchouli"],
@@ -341,7 +356,7 @@ export const fragrances: Fragrance[] = [
     name: "1 Million",
     brand: "Paco Rabanne",
     imageUrl: "https://i.ibb.co/5gW9KTRT/paco-rabanne-1-million.jpg",
-    concentration: "Eau de Toilette",
+    intensity: "Eau de Toilette",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -354,7 +369,9 @@ export const fragrances: Fragrance[] = [
       "A flamboyant scent of wealth and power — spicy leather wrapped in amber sweetness and citrus sparkle.",
     otherDetails: {
       launchYear: 2008,
-      fragranceFamily: "Woody Spicy",
+      manufacturerDescription:
+        "Paco Rabanne's perfumery labs combine molten spices and gilded leather through proprietary extraction for audacious projection.",
+      perfumer: "Christophe Raynaud, Olivier Pescheux, Michel Girard",
       topNotes: ["Blood Mandarin", "Grapefruit"],
       heartNotes: ["Cinnamon", "Rose", "Spice"],
       baseNotes: ["Leather", "Amber", "Patchouli"],
@@ -364,7 +381,7 @@ export const fragrances: Fragrance[] = [
     name: "The One for Men",
     brand: "Dolce & Gabbana",
     imageUrl: "https://i.ibb.co/r2JP7LVY/dolce-and-gabbana-the-one.webp",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -377,7 +394,9 @@ export const fragrances: Fragrance[] = [
       "A sophisticated balance of spices and warm tobacco, radiating timeless masculine elegance.",
     otherDetails: {
       launchYear: 2015,
-      fragranceFamily: "Woody Spicy",
+      manufacturerDescription:
+        "Dolce & Gabbana's Sartoria fragrance studio melds refined spices and honeyed tobacco via small-batch infusion for timeless elegance.",
+      perfumer: "Olivier Polge",
       topNotes: ["Grapefruit", "Coriander", "Basil"],
       heartNotes: ["Cardamom", "Ginger"],
       baseNotes: ["Tobacco", "Amber", "Cedar"],
@@ -387,7 +406,7 @@ export const fragrances: Fragrance[] = [
     name: "Divine Elixir",
     brand: "Jean Paul Gaultier",
     imageUrl: "https://i.ibb.co/nqbDtVbm/jean-paul-gaultier-gaultier-divine-elixir.webp",
-    concentration: "Parfum",
+    intensity: "Parfum",
     gender: "female",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -404,7 +423,9 @@ export const fragrances: Fragrance[] = [
       "An elixir of divine femininity — luminous white florals coated in honeyed sweetness and warm amber.",
     otherDetails: {
       launchYear: 2024,
-      fragranceFamily: "Amber Floral",
+      manufacturerDescription:
+        "Gaultier's Maison blends luminous florals and liquorous tonka inside a gilded elixir process tailored for sensual radiance.",
+      perfumer: "Quentin Bisch",
       topNotes: ["Orange Blossom"],
       heartNotes: ["Jasmine", "Honey"],
       baseNotes: ["Tonka Bean", "Patchouli"],
@@ -414,7 +435,7 @@ export const fragrances: Fragrance[] = [
     name: "Libre",
     brand: "Yves Saint Laurent",
     imageUrl: "https://i.ibb.co/SDLVgyMr/ysl-libre.webp",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "female",
     suitableTimes: ["day", "night"],
     suitableSeasons: ["spring", "fall", "winter"],
@@ -433,7 +454,9 @@ export const fragrances: Fragrance[] = [
       "Freedom in a bottle — the tension between masculine lavender and feminine orange blossom wrapped in sensual amber.",
     otherDetails: {
       launchYear: 2019,
-      fragranceFamily: "Amber Fougere",
+      manufacturerDescription:
+        "YSL Beauty's ateliers weave haute couture lavender and amber accords with precision distillation for a signature tension.",
+      perfumer: "Anne Flipo, Carlos Benaïm, Dominique Ropion",
       topNotes: ["Mandarin", "Lavender"],
       heartNotes: ["Orange Blossom", "Jasmine"],
       baseNotes: ["Vanilla", "Tonka Bean", "Ambergris"],
@@ -443,7 +466,7 @@ export const fragrances: Fragrance[] = [
     name: "Good Girl Blush Elixir",
     brand: "Carolina Herrera",
     imageUrl: "https://i.ibb.co/JRrKhWP2/carolina-herrera-good-girl-blush-elixir.webp",
-    concentration: "Eau de Parfum Elixir",
+    intensity: "Eau de Parfum Elixir",
     gender: "female",
     suitableTimes: ["night"],
     suitableSeasons: ["spring", "fall"],
@@ -456,7 +479,9 @@ export const fragrances: Fragrance[] = [
       "A sensual re-imagining of Good Girl — creamy florals and glowing vanilla enriched with the intensity of an elixir.",
     otherDetails: {
       launchYear: 2023,
-      fragranceFamily: "Chypre Ambery Floral",
+      manufacturerDescription:
+        "Carolina Herrera's perfumery lab macerates luminous florals and creamy vanilla into an intense chypre-inspired elixir.",
+      perfumer: "Quentin Bisch",
       topNotes: ["Bergamot", "Bitter Almond"],
       heartNotes: ["Ylang-Ylang", "Rose"],
       baseNotes: ["Vanilla", "Patchouli"],
@@ -466,7 +491,7 @@ export const fragrances: Fragrance[] = [
     name: "La Nuit de l’Homme",
     brand: "Yves Saint Laurent",
     imageUrl: "https://i.ibb.co/bjy3MZ39/ysl-la-nuit-de-lhomme.webp",
-    concentration: "Eau de Toilette",
+    intensity: "Eau de Toilette",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -479,7 +504,9 @@ export const fragrances: Fragrance[] = [
       "Seductive and mysterious, La Nuit de l’Homme blends cardamom spice and creamy woods for irresistible allure.",
     otherDetails: {
       launchYear: 2009,
-      fragranceFamily: "Woody Spicy",
+      manufacturerDescription:
+        "YSL's contemporary atelier infuses cardamom and lavender through precise cold maceration for a smoldering evening trail.",
+      perfumer: "Anne Flipo, Pierre Wargnye, Dominique Ropion",
       topNotes: ["Cardamom"],
       heartNotes: ["Lavender", "Cedar"],
       baseNotes: ["Vetiver", "Coumarin"],
@@ -489,7 +516,7 @@ export const fragrances: Fragrance[] = [
     name: "Virgin Island Water",
     brand: "Creed",
     imageUrl: "https://i.ibb.co/1Ghfw4Cr/creed-virgin-island-water.jpg",
-    concentration: "Eau de Parfum",
+    intensity: "Eau de Parfum",
     gender: "unisex",
     suitableTimes: ["day"],
     suitableSeasons: ["spring", "summer"],
@@ -509,7 +536,9 @@ export const fragrances: Fragrance[] = [
       "A tropical escape bottled — the scent of lime, coconut, and white rum carried on a warm sea breeze. Inspired by sailing through the Caribbean waters.",
     otherDetails: {
       launchYear: 2007,
-      fragranceFamily: "Citrus Gourmand",
+      manufacturerDescription:
+        "Creed's Parisian atelier captures Caribbean breezes with hand-zested citrus and island botanicals in small copper stills.",
+      perfumer: "Erwin Creed, Pierre Bourdon",
       topNotes: ["Lime", "Bergamot", "Mandarin"],
       heartNotes: ["Coconut", "Ylang-Ylang", "Jasmine"],
       baseNotes: ["White Rum", "Sugar Cane", "Musk"]
@@ -519,7 +548,7 @@ export const fragrances: Fragrance[] = [
     name: "Bottled Absolu",
     brand: "Hugo Boss",
     imageUrl: "https://i.ibb.co/R4J30j1m/hugo-boss-bottled-absolu.jpg",
-    concentration: "Parfum Intense",
+    intensity: "Parfum Intense",
     gender: "male",
     suitableTimes: ["night"],
     suitableSeasons: ["fall", "winter"],
@@ -539,7 +568,9 @@ export const fragrances: Fragrance[] = [
       "Dark incense and myrrh fuse with smooth leather and woody patchouli to evoke depth, warmth, and timeless masculinity.",
     otherDetails: {
       launchYear: 2019,
-      fragranceFamily: "Amber Woody",
+      manufacturerDescription:
+        "Hugo Boss's Cologne Atelier slow-roasts resins and leathers to create a richly textured, evening-ready parfum intense.",
+      perfumer: "Annick Ménardo",
       topNotes: ["Incense", "Leather"],
       heartNotes: ["Patchouli", "Myrrh"],
       baseNotes: ["Cedarwood", "Davana"]
@@ -548,7 +579,7 @@ export const fragrances: Fragrance[] = [
   {
     name: 'Neroli Portofino',
     brand: 'Tom Ford',
-    concentration: 'Eau de Parfum',
+    intensity: 'Eau de Parfum',
     gender: 'unisex',
     suitableTimes: ['day'],
     suitableSeasons: ['spring', 'summer'],
@@ -569,7 +600,9 @@ export const fragrances: Fragrance[] = [
     otherDetails: {
       collection: 'Private Blend',
       launchYear: 2011,
-      fragranceFamily: 'Citrus Aromatic',
+      manufacturerDescription:
+        'Tom Ford Private Blend artisans weave Italian citrus oils and coastal botanicals into a luminous, cold-pressed elixir.',
+      perfumer: "Rodrigo Flores-Roux",
       topNotes: ['Bergamot', 'Mandarin', 'Lemon', 'Neroli'],
       heartNotes: ['Orange Blossom', 'Rosemary', 'Lavender'],
       baseNotes: ['Amber', 'Musk', 'Angelica']
