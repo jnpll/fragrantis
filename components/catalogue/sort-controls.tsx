@@ -10,9 +10,7 @@ import {
   IconCalendarDown,
   IconCalendarUp,
   IconSortAscendingLetters,
-  IconSortAZ,
   IconSortDescendingLetters,
-  IconSortZA,
 } from "@tabler/icons-react";
 import {
   Tooltip,
