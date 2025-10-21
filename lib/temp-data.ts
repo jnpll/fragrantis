@@ -173,7 +173,7 @@ export const fragrances: Fragrance[] = [
     otherDetails: {
       collection: "Private Blend",
       launchYear: 2025,
-      fragranceFamily: "Floral Woody Amber",
+      fragranceFamily: "Floral Woody",
       topNotes: ["Geranium"],
       heartNotes: ["Peony", "Osmanthus"],
       baseNotes: ["Oud", "Cypriol"],

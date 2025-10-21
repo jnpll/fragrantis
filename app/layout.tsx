@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Explore the world of fragrances",
 };
 
+import { Navbar } from "@/components/navbar";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </div>
       </body>
     </html>
   );

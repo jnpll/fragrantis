@@ -45,7 +45,7 @@ export function FiltersPanel({
 
   return (
     <aside
-      className={cn("space-y-6 border-r border-border p-5", className)}
+      className={cn("space-y-6 p-5", className)}
     >
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">

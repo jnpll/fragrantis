@@ -155,7 +155,7 @@ export default function CataloguePage() {
   return (
     <div className="min-h-screen bg-background">
       <FiltersPanel
-        className="fixed left-6 top-28 hidden w-64 lg:block"
+        className="fixed left-6 top-28 hidden w-64 xl:block"
         {...filtersProps}
       />
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-6 py-16 sm:px-10 lg:px-16">
@@ -194,7 +194,7 @@ export default function CataloguePage() {
         </header>
 
         <div className="space-y-8 lg:space-y-10">
-          <div className="lg:hidden">
+          <div className="xl:hidden">
             <FiltersPanel {...filtersProps} />
           </div>
 

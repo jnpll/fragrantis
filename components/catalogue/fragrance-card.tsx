@@ -53,20 +53,19 @@ export function FragranceCard({
   const { borderGradient, glassGradient } = gradientConfig
 
   return (
-    <Card className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-[oklch(0.98_0_0/0.65)] backdrop-blur-xl transition-shadow duration-200 hover:shadow-lg">
+    <Card className="relative flex h-full flex-col overflow-hidden dark:rounded-2xl backdrop-blur-xl transition-shadow duration-200 hover:shadow-lg">
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl"
+        className="invisible dark:visible pointer-events-none absolute inset-0 rounded-2xl"
         style={{
           padding: 1,
           background: borderGradient,
-          WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "xor",
           maskComposite: "exclude",
         }}
       />
       <div
-        className="absolute inset-0 -z-10 rounded-2xl"
+        className="invisible dark:visible absolute inset-0 -z-10 rounded-2xl"
         style={{
           background: glassGradient,
           opacity: 0.55,
@@ -75,7 +74,7 @@ export function FragranceCard({
       />
       <CardHeader className="gap-0">
         {fragrance.imageUrl ? (
-          <div className="relative aspect-3/4 w-full overflow-hidden rounded-t-xl">
+          <div className="relative aspect-3/4 w-full overflow-hidden dark:rounded-t-xl">
             <Image
               src={fragrance.imageUrl}
               alt={`${fragrance.name} by ${fragrance.brand}`}
@@ -86,7 +85,7 @@ export function FragranceCard({
             />
           </div>
         ) : (
-          <div className="aspect-3/4 w-full overflow-hidden rounded-t-xl bg-muted">
+          <div className="aspect-3/4 w-full overflow-hidden dark:rounded-t-xl bg-muted">
             <div className="flex h-full items-center justify-center text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
               Image pending
             </div>
@@ -112,16 +111,16 @@ export function FragranceCard({
           </h2>
           <div className="flex flex-wrap gap-2">
             {fragrance.accords.main.map((accord) => (
-              <Badge
+                <Badge
                 key={`main-${accord}`}
+                className="text-muted-foreground dark:text-(--accord-text-color) bg-muted dark:bg-(--accord-bg-color)"
                 style={{
-                  backgroundColor: accordColorMap.get(accord),
-                  color: getAccordTextColor(accordColorMap.get(accord)),
-                  borderColor: "transparent",
-                }}
-              >
+                  '--accord-bg-color': accordColorMap.get(accord),
+                  '--accord-text-color': getAccordTextColor(accordColorMap.get(accord)),
+                } as React.CSSProperties}
+                >
                 {formatAccordName(accord)}
-              </Badge>
+                </Badge>
             ))}
           </div>
           <div className="space-y-2">
@@ -132,7 +131,7 @@ export function FragranceCard({
         <p className="text-sm text-muted-foreground italic">{fragrance.description}</p>
 
       </CardContent>
-      <CardFooter className="mt-auto border-t border-border/60 pt-4">
+      <CardFooter className="mt-auto border-t border-border/60">
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>Launched {fragrance.otherDetails.launchYear}</span>
           <span aria-hidden="true">•</span>
