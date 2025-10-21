@@ -50,7 +50,7 @@ export function CatalogueToolbar({
 
   return (
     <div className={cn("sticky top-16 z-40 w-full", className)}>
-      <div className="w-full bg-card ">
+      <div className="w-full bg-card">
         <div className="flex flex-col mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 gap-8 pt-8 pb-4 md:flex-row md:items-center md:justify-between">
           <Sheet>
             <SheetTrigger asChild>
