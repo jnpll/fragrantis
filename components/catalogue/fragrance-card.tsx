@@ -74,7 +74,7 @@ export function FragranceCard({
       />
       <CardHeader className="gap-0">
         {fragrance.imageUrl ? (
-          <div className="relative aspect-3/4 w-full overflow-hidden dark:rounded-t-xl">
+          <div className="relative aspect-5/6 w-full overflow-hidden dark:rounded-t-xl">
             <Image
               src={fragrance.imageUrl}
               alt={`${fragrance.name} by ${fragrance.brand}`}
@@ -85,7 +85,7 @@ export function FragranceCard({
             />
           </div>
         ) : (
-          <div className="aspect-3/4 w-full overflow-hidden dark:rounded-t-xl bg-muted">
+          <div className="aspect-5/6 w-full overflow-hidden dark:rounded-t-xl bg-muted">
             <div className="flex h-full items-center justify-center text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
               Image pending
             </div>
@@ -93,20 +93,21 @@ export function FragranceCard({
         )}
       </CardHeader>
       <CardContent className="flex flex-1 flex-col space-y-5">
-        <div className="space-y-2">
+        <div id="fragrance-header" className="space-y-1">
           <CardTitle className="text-xl">{fragrance.name}</CardTitle>
           <CardDescription className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground/80">
             {fragrance.brand}
           </CardDescription>
-          <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-            <span>{fragrance.concentration}</span>
-            <span aria-hidden="true">•</span>
-            <span>{genderLabel}</span>
-          </div>
         </div>
 
-        <div className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+        <div id="fragrance-details" className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
+          <span>{fragrance.intensity}</span>
+          <span aria-hidden="true">•</span>
+          <span>{genderLabel}</span>
+        </div>
+
+        <div id="fragrance-scent-profile" className="space-y-2">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             Scent Profile
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -128,14 +129,14 @@ export function FragranceCard({
           </div>
         </div>
 
-        <p className="text-sm text-muted-foreground italic">{fragrance.description}</p>
+        <p id="fragrance-description" className="text-sm text-muted-foreground font-light italic">{fragrance.description}</p>
 
       </CardContent>
       <CardFooter className="mt-auto border-t border-border/60">
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-          <span>Launched {fragrance.otherDetails.launchYear}</span>
+          <span>{fragrance.otherDetails.launchYear}</span>
           <span aria-hidden="true">•</span>
-          <span>{fragrance.otherDetails.fragranceFamily}</span>
+          <span>{fragrance.otherDetails.perfumer}</span>
           {fragrance.otherDetails.collection && (
             <>
               <span aria-hidden="true">•</span>
