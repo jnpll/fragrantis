@@ -1,137 +1,177 @@
-"use client"
+"use client";
 
-import Link from "next/link"
+import Link from "next/link";
 
-import { FiltersPanel } from "@/components/catalogue/filters-panel"
-import { FragranceCard } from "@/components/catalogue/fragrance-card"
+import { FragranceCard } from "@/components/catalogue/fragrance-card";
+import { CatalogueToolbar } from "@/components/catalogue/catalogue-toolbar";
+import { type SortOption } from "@/components/catalogue/filters-panel";
 import {
   type Gender,
   fragrances,
   olfactory_accords,
   olfactory_families,
-} from "@/lib/temp-data"
-import { useMemo, useState } from "react"
+} from "@/lib/temp-data";
+import { useMemo, useState } from "react";
 
 const genderLabels: Record<Gender, string> = {
   male: "Masculine",
   female: "Feminine",
   unisex: "Unisex",
-}
-
-const sortedFragrances = [...fragrances].sort((a, b) =>
-  a.brand.localeCompare(b.brand)
-)
+};
 
 const accordColorMap = new Map(
-  olfactory_accords.map((accord) => [accord.name, accord.color] as const)
-)
+  olfactory_accords.map((accord) => [accord.name, accord.color] as const),
+);
 
 const familyById = new Map(
-  olfactory_families.map((family) => [family.id, family.name] as const)
-)
+  olfactory_families.map((family) => [family.id, family.name] as const),
+);
 
 const accordFamilyLookup = new Map(
   olfactory_accords.map(
-    (accord) => [accord.name, familyById.get(accord.familyId) ?? ""] as const
-  )
-)
+    (accord) => [accord.name, familyById.get(accord.familyId) ?? ""] as const,
+  ),
+);
 
 const familyOptions = Array.from(familyById.values()).sort((a, b) =>
-  a.localeCompare(b)
-)
+  a.localeCompare(b),
+);
 
 const accordOptions = Array.from(
-  new Set(olfactory_accords.map((accord) => accord.name))
-).sort((a, b) => a.localeCompare(b))
+  new Set(olfactory_accords.map((accord) => accord.name)),
+).sort((a, b) => a.localeCompare(b));
 
 const brandOptions = Array.from(
-  new Set(fragrances.map((fragrance) => fragrance.brand))
-).sort((a, b) => a.localeCompare(b))
+  new Set(fragrances.map((fragrance) => fragrance.brand)),
+).sort((a, b) => a.localeCompare(b));
 
-const genderOptions: Gender[] = ["male", "female", "unisex"]
+const genderOptions: Gender[] = ["male", "female", "unisex"];
 
 export default function CataloguePage() {
-  const [selectedFamilies, setSelectedFamilies] = useState<string[]>([])
-  const [selectedAccords, setSelectedAccords] = useState<string[]>([])
-  const [selectedGenders, setSelectedGenders] = useState<Gender[]>([])
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([])
+  const [selectedFamilies, setSelectedFamilies] = useState<string[]>([]);
+  const [selectedAccords, setSelectedAccords] = useState<string[]>([]);
+  const [selectedGenders, setSelectedGenders] = useState<Gender[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortOption, setSortOption] = useState<SortOption>("brand-asc");
 
   const toggleSelection = <T,>(
     value: T,
-    setter: (updater: (prev: T[]) => T[]) => void
+    setter: (updater: (prev: T[]) => T[]) => void,
   ) => {
     setter((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)
-        : [...prev, value]
-    )
-  }
+        : [...prev, value],
+    );
+  };
 
   const filteredFragrances = useMemo(() => {
-    return sortedFragrances.filter((fragrance) => {
+    return fragrances.filter((fragrance) => {
       const fragranceAccords = [
         ...fragrance.accords.main,
         ...fragrance.accords.sub,
-      ]
+      ];
+
+      const query = searchQuery.trim().toLowerCase();
+      if (query) {
+        const haystack = [
+          fragrance.name,
+          fragrance.brand,
+          fragrance.otherDetails.perfumer,
+          ...fragrance.notes,
+          ...fragranceAccords,
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        if (!haystack.includes(query)) {
+          return false;
+        }
+      }
 
       if (
         selectedAccords.length > 0 &&
         !fragranceAccords.some((accord) => selectedAccords.includes(accord))
       ) {
-        return false
+        return false;
       }
 
       const fragranceFamilies = new Set(
         fragranceAccords
           .map((accord) => accordFamilyLookup.get(accord))
-          .filter((family): family is string => Boolean(family))
-      )
+          .filter((family): family is string => Boolean(family)),
+      );
 
       if (
         selectedFamilies.length > 0 &&
         !selectedFamilies.some((family) => fragranceFamilies.has(family))
       ) {
-        return false
+        return false;
       }
 
       if (
         selectedGenders.length > 0 &&
         !selectedGenders.includes(fragrance.gender)
       ) {
-        return false
+        return false;
       }
 
       if (
         selectedBrands.length > 0 &&
         !selectedBrands.includes(fragrance.brand)
       ) {
-        return false
+        return false;
       }
 
-      return true
-    })
+      return true;
+    });
   }, [
+    searchQuery,
     selectedAccords,
     selectedFamilies,
     selectedGenders,
     selectedBrands,
-  ])
+  ]);
+
+  const sortedFragrances = useMemo(() => {
+    const list = [...filteredFragrances];
+    switch (sortOption) {
+      case "brand-desc":
+        return list.sort((a, b) => b.brand.localeCompare(a.brand));
+      case "name-asc":
+        return list.sort((a, b) => a.name.localeCompare(b.name));
+      case "name-desc":
+        return list.sort((a, b) => b.name.localeCompare(a.name));
+      case "newest":
+        return list.sort(
+          (a, b) => b.otherDetails.launchYear - a.otherDetails.launchYear,
+        );
+      case "oldest":
+        return list.sort(
+          (a, b) => a.otherDetails.launchYear - b.otherDetails.launchYear,
+        );
+      case "brand-asc":
+      default:
+        return list.sort((a, b) => a.brand.localeCompare(b.brand));
+    }
+  }, [filteredFragrances, sortOption]);
 
   const clearFilters = () => {
-    setSelectedFamilies([])
-    setSelectedAccords([])
-    setSelectedGenders([])
-    setSelectedBrands([])
-  }
+    setSelectedFamilies([]);
+    setSelectedAccords([]);
+    setSelectedGenders([]);
+    setSelectedBrands([]);
+  };
 
   const handleToggleFamily = (family: string) =>
-    toggleSelection(family, setSelectedFamilies)
+    toggleSelection(family, setSelectedFamilies);
   const handleToggleAccord = (accord: string) =>
-    toggleSelection(accord, setSelectedAccords)
+    toggleSelection(accord, setSelectedAccords);
   const handleToggleGender = (gender: string) =>
-    toggleSelection(gender as Gender, setSelectedGenders)
+    toggleSelection(gender as Gender, setSelectedGenders);
   const handleToggleBrand = (brand: string) =>
-    toggleSelection(brand, setSelectedBrands)
+    toggleSelection(brand, setSelectedBrands);
 
   const filtersProps = {
     familyOptions,
@@ -150,16 +190,16 @@ export default function CataloguePage() {
     onToggleGender: handleToggleGender,
     onToggleBrand: handleToggleBrand,
     onClear: clearFilters,
-  }
+    sortValue: sortOption,
+    onSortChange: (value: SortOption) => setSortOption(value),
+  };
+
+  const resultsCount = sortedFragrances.length;
 
   return (
     <div className="min-h-screen bg-background">
-      <FiltersPanel
-        className="fixed left-6 top-28 hidden w-64 xl:block"
-        {...filtersProps}
-      />
-      <main className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-6 py-16 sm:px-10 lg:px-16">
-        <header className="space-y-6">
+      <main className="mx-auto flex w-full flex-col gap-0">
+        <header className="space-y-6 w-full max-w-7xl mx-auto px-6 py-6 sm:px-10 lg:px-16">
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -193,15 +233,18 @@ export default function CataloguePage() {
           </div>
         </header>
 
-        <div className="space-y-8 lg:space-y-10">
-          <div className="xl:hidden">
-            <FiltersPanel {...filtersProps} />
-          </div>
+        <CatalogueToolbar
+          filtersProps={filtersProps}
+          searchQuery={searchQuery}
+          onSearchChange={(value) => setSearchQuery(value)}
+          resultsCount={resultsCount}
+        />
 
+        <div className="space-y-8 lg:space-y-10 w-full max-w-7xl mx-auto px-6 py-6 sm:px-10 lg:px-16">
           <div className="space-y-6">
-            {filteredFragrances.length > 0 ? (
+            {resultsCount > 0 ? (
               <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {filteredFragrances.map((fragrance) => (
+                {sortedFragrances.map((fragrance) => (
                   <FragranceCard
                     key={`${fragrance.brand}-${fragrance.name}`}
                     fragrance={fragrance}
@@ -220,5 +263,5 @@ export default function CataloguePage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

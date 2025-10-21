@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { IconMoon, IconSun } from "@tabler/icons-react"
+import { Button } from "@/components/ui/button";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 
 export function Navbar() {
-  const { theme, resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   const effectiveTheme = !mounted
     ? undefined
     : theme === "system"
       ? resolvedTheme
-      : theme
+      : theme;
 
-  const isDark = effectiveTheme === "dark"
+  const isDark = effectiveTheme === "dark";
 
   const toggleTheme = () => {
-    setTheme(isDark ? "light" : "dark")
-  }
+    setTheme(isDark ? "light" : "dark");
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background">
       <div className="mx-auto flex h-16 items-center justify-between px-6 sm:px-10 lg:px-16">
         <Link
           href="/"
@@ -53,5 +53,5 @@ export function Navbar() {
         </Button>
       </div>
     </header>
-  )
+  );
 }
