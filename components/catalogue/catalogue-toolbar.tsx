@@ -144,45 +144,47 @@ export function CatalogueToolbar({
         </div>
       </div>
       {hasActiveFilters ? (
-        <div className="relative mx-auto max-w-7xl px-6 backdrop-blur supports-backdrop-filter:bg-background/80 sm:px-10 lg:px-16">
-          <div
-            id="catalogue-active-filters"
-            className={cn(
-              "flex flex-wrap gap-2 overflow-hidden transition-all duration-300 ease-in-out",
-              showTags
-                ? "max-h-52 opacity-100 py-4"
-                : "pointer-events-none max-h-0 opacity-0 py-0",
-            )}
-          >
-            {activeFilters.map((filter) => (
-              <FilterTag
-                key={filter.key}
-                label={filter.label}
-                onRemove={filter.onRemove}
-              />
-            ))}
-          </div>
-          {isSticky ? (
-            <Button
-              type="button"
-              size="icon"
-              variant="outline"
-              onClick={() => setShowTags((prev) => !prev)}
-              aria-expanded={showTags}
-              aria-controls="catalogue-active-filters"
-              className="absolute right-6 top-full -translate-y-1/2 rounded-full border-border/60 bg-background shadow-sm transition-transform sm:right-10 lg:right-16"
+        <div className="relative border-b backdrop-blur supports-backdrop-filter:bg-background/80">
+          <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+            <div
+              id="catalogue-active-filters"
+              className={cn(
+                "flex flex-wrap overflow-hidden gap-2 transition-all duration-300 ease-in-out",
+                showTags
+                  ? "max-h-52 opacity-100 py-4"
+                  : "pointer-events-none max-h-0 opacity-0 py-0",
+              )}
             >
-              <IconChevronDown
-                className={cn(
-                  "transition-transform duration-300",
-                  showTags ? "rotate-180" : "rotate-0",
-                )}
-              />
-              <span className="sr-only">
-                {showTags ? "Hide active filters" : "Show active filters"}
-              </span>
-            </Button>
-          ) : null}
+              {activeFilters.map((filter) => (
+                <FilterTag
+                  key={filter.key}
+                  label={filter.label}
+                  onRemove={filter.onRemove}
+                />
+              ))}
+            </div>
+            {isSticky ? (
+              <Button
+                type="button"
+                size="icon"
+                variant="default"
+                onClick={() => setShowTags((prev) => !prev)}
+                aria-expanded={showTags}
+                aria-controls="catalogue-active-filters"
+                className="absolute size-6 top-full -translate-y-1/2 rounded-full border border-border shadow-sm transition-transform right-3 sm:right-7 lg:right-13"
+              >
+                <IconChevronDown
+                  className={cn(
+                    "transition-transform duration-300",
+                    showTags ? "rotate-180" : "rotate-0",
+                  )}
+                />
+                <span className="sr-only">
+                  {showTags ? "Hide active filters" : "Show active filters"}
+                </span>
+              </Button>
+            ) : null}
+          </div>
         </div>
       ) : null}
     </div>
