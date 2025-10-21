@@ -67,16 +67,13 @@ export function FiltersPanel({
           Filters
         </h2>
 
-        <Accordion
-          type="multiple"
-          className="flex-1 space-y-2 overflow-y-auto pr-1"
-        >
+        <Accordion type="multiple" className="flex-1 space-y-2">
           <AccordionItem value="family">
             <AccordionTrigger className="text-xs uppercase tracking-[0.3em]">
               Family
             </AccordionTrigger>
             <AccordionContent>
-              <div className="max-h-40 space-y-2 overflow-y-auto pr-1 text-sm">
+              <div className="space-y-2 text-sm">
                 {familyOptions.map((family) => (
                   <label
                     key={family}
@@ -98,7 +95,7 @@ export function FiltersPanel({
               Accords
             </AccordionTrigger>
             <AccordionContent>
-              <div className="max-h-48 space-y-2 overflow-y-auto pr-1 text-sm">
+              <div className="space-y-2 text-sm">
                 {accordOptions.map((accord) => (
                   <label
                     key={accord}
@@ -142,7 +139,7 @@ export function FiltersPanel({
               Brand
             </AccordionTrigger>
             <AccordionContent>
-              <div className="max-h-40 space-y-2 overflow-y-auto pr-1 text-sm">
+              <div className="space-y-2 text-sm">
                 {brandOptions.map((brand) => (
                   <label
                     key={brand}
