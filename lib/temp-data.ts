@@ -579,6 +579,7 @@ export const fragrances: Fragrance[] = [
   {
     name: 'Neroli Portofino',
     brand: 'Tom Ford',
+    imageUrl: "https://i.ibb.co/4wDMVxTt/tom-ford-neroli-portofino.jpg",
     intensity: 'Eau de Parfum',
     gender: 'unisex',
     suitableTimes: ['day'],
