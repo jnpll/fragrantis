@@ -18,7 +18,7 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
             <Button asChild size="lg">
-              <Link href="/catalogue">Explore the Catalogue</Link>
+              <Link href="/catalogue">Explore the catalogue</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/olfactory">View the scent profiles</Link>

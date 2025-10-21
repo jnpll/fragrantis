@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -23,10 +24,10 @@ export function FragranceCard({
   genderLabel,
 }: FragranceCardProps) {
   return (
-    <Card>
-      <CardHeader className="gap-4">
+    <Card className="hover:shadow-lg transition-shadow duration-200 flex flex-col">
+      <CardHeader className="gap-0 hover:cursor-pointer">
         {fragrance.imageUrl ? (
-          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg border border-border/70 bg-muted">
+          <div className="relative aspect-3/4 w-full overflow-hidden bg-muted">
             <Image
               src={fragrance.imageUrl}
               alt={`${fragrance.name} by ${fragrance.brand}`}
@@ -37,7 +38,7 @@ export function FragranceCard({
             />
           </div>
         ) : (
-          <div className="aspect-[3/4] w-full overflow-hidden rounded-lg border border-dashed border-border/70 bg-muted">
+          <div className="aspect-3/4 w-full overflow-hidden bg-muted">
             <div className="flex h-full items-center justify-center text-xs font-medium uppercase tracking-widest text-muted-foreground">
               Image pending
             </div>
@@ -46,7 +47,7 @@ export function FragranceCard({
       </CardHeader>
       <CardContent className="space-y-5">
         <div className="space-y-2">
-          <CardTitle className="text-xl">{fragrance.name}</CardTitle>
+          <CardTitle className="text-xl hover:underline hover:cursor-pointer">{fragrance.name}</CardTitle>
           <CardDescription className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground/80">
             {fragrance.brand}
           </CardDescription>
@@ -58,7 +59,7 @@ export function FragranceCard({
         </div>
 
         <div className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
             Scent Profile
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -75,21 +76,15 @@ export function FragranceCard({
               </Badge>
             ))}
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            {fragrance.accords.sub.map((accord) => (
-              <Badge key={`sub-${accord}`} variant="secondary" className="text-xs">
-                {formatAccordName(accord)}
-              </Badge>
-            ))}
+          <div className="space-y-2">
+            <p className="text-xs text-muted-foreground">{fragrance.notes.join(" · ")}</p>
           </div>
-        </div>
-
-        <div className="space-y-2">
-          <p className="text-xs text-muted-foreground">{fragrance.notes.join(" · ")}</p>
         </div>
 
         <p className="text-sm text-muted-foreground italic">{fragrance.description}</p>
 
+      </CardContent>
+      <CardFooter className="mt-auto">
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>Launched {fragrance.otherDetails.launchYear}</span>
           <span aria-hidden="true">•</span>
@@ -101,7 +96,7 @@ export function FragranceCard({
             </>
           )}
         </div>
-      </CardContent>
+      </CardFooter>
     </Card>
   )
 }

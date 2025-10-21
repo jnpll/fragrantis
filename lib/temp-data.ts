@@ -450,7 +450,7 @@ export const fragrances: Fragrance[] = [
     notes: ["Ylang-Ylang", "Rose", "Vanilla", "Tonka Bean", "Patchouli"],
     accords: {
       main: ["Floral", "Sweet"],
-      sub: ["Vanilla", "Amber", "WarmSpicy"],
+      sub: ["Vanilla", "Amber", "WarmSpicy", "Chypre"],
     },
     description:
       "A sensual re-imagining of Good Girl — creamy florals and glowing vanilla enriched with the intensity of an elixir.",
@@ -536,7 +536,7 @@ export const fragrances: Fragrance[] = [
       sub: ["Amber", "Woody", "Resinous", "Balsamic"]
     },
     description:
-      "A bold and refined interpretation of the Boss Bottled signature. Dark incense and myrrh fuse with smooth leather and woody patchouli to evoke depth, warmth, and timeless masculinity.",
+      "Dark incense and myrrh fuse with smooth leather and woody patchouli to evoke depth, warmth, and timeless masculinity.",
     otherDetails: {
       launchYear: 2019,
       fragranceFamily: "Amber Woody",
