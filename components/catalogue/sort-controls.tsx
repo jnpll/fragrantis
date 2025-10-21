@@ -98,7 +98,7 @@ export function SortControls({ value, onChange }: SortControlsProps) {
 
   return (
     <div className="space-y-2">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+      <h2 className="text-base font-semibold uppercase tracking-[0.3em] text-muted-foreground">
         Sort
       </h2>
       <div className="flex items-center gap-2">

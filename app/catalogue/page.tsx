@@ -7,6 +7,7 @@ import { CatalogueToolbar } from "@/components/catalogue/catalogue-toolbar";
 import { type SortOption } from "@/components/catalogue/filters-panel";
 import {
   type Gender,
+  type Season,
   fragrances,
   olfactory_accords,
   olfactory_families,
@@ -29,6 +30,7 @@ type StoredCatalogueState = {
   families: string[];
   accords: string[];
   genders: Gender[];
+  seasons: Season[];
   brands: string[];
   search: string;
   sort: SortOption;
@@ -44,6 +46,7 @@ const SORT_OPTIONS: SortOption[] = [
 ];
 
 const GENDER_VALUES: Gender[] = ["male", "female", "unisex"];
+const SEASON_VALUES: Season[] = ["spring", "summer", "fall", "winter"];
 
 const isSortOption = (value: unknown): value is SortOption =>
   typeof value === "string" && SORT_OPTIONS.includes(value as SortOption);
@@ -70,6 +73,13 @@ const sanitizeStoredState = (value: unknown): StoredCatalogueState | null => {
           GENDER_VALUES.includes(gender as Gender),
       )
     : [];
+  const seasons = Array.isArray(data.seasons)
+    ? data.seasons.filter(
+        (season): season is Season =>
+          typeof season === "string" &&
+          SEASON_VALUES.includes(season as Season),
+      )
+    : [];
   const search = typeof data.search === "string" ? (data.search as string) : "";
   const sort = isSortOption(data.sort)
     ? (data.sort as SortOption)
@@ -79,6 +89,7 @@ const sanitizeStoredState = (value: unknown): StoredCatalogueState | null => {
     families,
     accords,
     genders,
+    seasons,
     brands,
     search,
     sort,
@@ -125,11 +136,19 @@ const brandOptions = Array.from(
 ).sort((a, b) => a.localeCompare(b));
 
 const genderOptions: Gender[] = [...GENDER_VALUES];
+const seasonOptions: Season[] = [...SEASON_VALUES];
+const seasonLabels: Record<Season, string> = {
+  spring: "Spring",
+  summer: "Summer",
+  fall: "Fall",
+  winter: "Winter",
+};
 
 export default function CataloguePage() {
   const [selectedFamilies, setSelectedFamilies] = useState<string[]>([]);
   const [selectedAccords, setSelectedAccords] = useState<string[]>([]);
   const [selectedGenders, setSelectedGenders] = useState<Gender[]>([]);
+  const [selectedSeasons, setSelectedSeasons] = useState<Season[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState<SortOption>("brand-asc");
@@ -163,6 +182,9 @@ export default function CataloguePage() {
     const normalisedGenders = stored.genders.filter((gender) =>
       genderOptions.includes(gender),
     );
+    const normalisedSeasons = stored.seasons.filter((season) =>
+      seasonOptions.includes(season),
+    );
     const normalisedSort = isSortOption(stored.sort)
       ? stored.sort
       : "brand-asc";
@@ -175,6 +197,9 @@ export default function CataloguePage() {
     }
     if (normalisedGenders.length > 0) {
       setSelectedGenders(normalisedGenders);
+    }
+    if (normalisedSeasons.length > 0) {
+      setSelectedSeasons(normalisedSeasons);
     }
     if (normalisedBrands.length > 0) {
       setSelectedBrands(normalisedBrands);
@@ -196,6 +221,7 @@ export default function CataloguePage() {
       families: selectedFamilies,
       accords: selectedAccords,
       genders: selectedGenders,
+      seasons: selectedSeasons,
       brands: selectedBrands,
       search: searchQuery,
       sort: sortOption,
@@ -206,6 +232,7 @@ export default function CataloguePage() {
         payload.families.length === 0 &&
         payload.accords.length === 0 &&
         payload.genders.length === 0 &&
+        payload.seasons.length === 0 &&
         payload.brands.length === 0 &&
         payload.search.trim() === "" &&
         payload.sort === "brand-asc";
@@ -225,6 +252,7 @@ export default function CataloguePage() {
     selectedFamilies,
     selectedAccords,
     selectedGenders,
+    selectedSeasons,
     selectedBrands,
     searchQuery,
     sortOption,
@@ -288,6 +316,15 @@ export default function CataloguePage() {
         return false;
       }
 
+      if (
+        selectedSeasons.length > 0 &&
+        !fragrance.suitableSeasons.some((season) =>
+          selectedSeasons.includes(season),
+        )
+      ) {
+        return false;
+      }
+
       return true;
     });
   }, [
@@ -295,6 +332,7 @@ export default function CataloguePage() {
     selectedAccords,
     selectedFamilies,
     selectedGenders,
+    selectedSeasons,
     selectedBrands,
   ]);
 
@@ -325,6 +363,7 @@ export default function CataloguePage() {
     setSelectedFamilies([]);
     setSelectedAccords([]);
     setSelectedGenders([]);
+    setSelectedSeasons([]);
     setSelectedBrands([]);
   };
 
@@ -334,6 +373,8 @@ export default function CataloguePage() {
     toggleSelection(accord, setSelectedAccords);
   const handleToggleGender = (gender: string) =>
     toggleSelection(gender as Gender, setSelectedGenders);
+  const handleToggleSeason = (season: string) =>
+    toggleSelection(season as Season, setSelectedSeasons);
   const handleToggleBrand = (brand: string) =>
     toggleSelection(brand, setSelectedBrands);
 
@@ -342,16 +383,20 @@ export default function CataloguePage() {
     accordOptions,
     genderLabels: genderLabels as Record<string, string>,
     genderOptions,
+    seasonLabels,
+    seasonOptions,
     brandOptions,
     selections: {
       families: selectedFamilies,
       accords: selectedAccords,
       genders: selectedGenders,
+      seasons: selectedSeasons,
       brands: selectedBrands,
     },
     onToggleFamily: handleToggleFamily,
     onToggleAccord: handleToggleAccord,
     onToggleGender: handleToggleGender,
+    onToggleSeason: handleToggleSeason,
     onToggleBrand: handleToggleBrand,
     onClear: clearFilters,
     sortValue: sortOption,

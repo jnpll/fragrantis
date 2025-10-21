@@ -8,6 +8,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { SheetFooter } from "@/components/ui/sheet";
 import { formatAccordName } from "@/lib/accord-utils";
+import type { Season } from "@/lib/temp-data";
 import { cn } from "@/lib/utils";
 import { SortControls, type SortOption } from "./sort-controls";
 
@@ -21,16 +22,20 @@ type FiltersPanelProps = {
   accordOptions: string[];
   genderLabels: Record<string, string>;
   genderOptions: string[];
+  seasonLabels: Record<Season, string>;
+  seasonOptions: Season[];
   brandOptions: string[];
   selections: {
     families: string[];
     accords: string[];
     genders: string[];
+    seasons: Season[];
     brands: string[];
   };
   onToggleFamily: (family: string) => void;
   onToggleAccord: (accord: string) => void;
   onToggleGender: (gender: string) => void;
+  onToggleSeason: (season: string) => void;
   onToggleBrand: (brand: string) => void;
   onClear: () => void;
 };
@@ -43,11 +48,14 @@ export function FiltersPanel({
   accordOptions,
   genderLabels,
   genderOptions,
+  seasonLabels,
+  seasonOptions,
   brandOptions,
   selections,
   onToggleFamily,
   onToggleAccord,
   onToggleGender,
+  onToggleSeason,
   onToggleBrand,
   onClear,
 }: FiltersPanelProps) {
@@ -55,6 +63,7 @@ export function FiltersPanel({
     selections.families.length +
       selections.accords.length +
       selections.genders.length +
+      selections.seasons.length +
       selections.brands.length >
     0;
 
@@ -63,7 +72,7 @@ export function FiltersPanel({
       <SortControls value={sortValue} onChange={onSortChange} />
 
       <div className="space-y-2">
-        <h2 className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+        <h2 className="text-base font-semibold uppercase tracking-[0.3em] text-muted-foreground">
           Filters
         </h2>
 
@@ -128,6 +137,28 @@ export function FiltersPanel({
                       onCheckedChange={() => onToggleGender(gender)}
                     />
                     <span>{genderLabels[gender]}</span>
+                  </label>
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="season">
+            <AccordionTrigger className="text-xs uppercase tracking-[0.3em]">
+              Season
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-2 text-sm">
+                {seasonOptions.map((season) => (
+                  <label
+                    key={season}
+                    className="flex items-center gap-2 text-muted-foreground"
+                  >
+                    <Checkbox
+                      checked={selections.seasons.includes(season)}
+                      onCheckedChange={() => onToggleSeason(season)}
+                    />
+                    <span>{seasonLabels[season]}</span>
                   </label>
                 ))}
               </div>

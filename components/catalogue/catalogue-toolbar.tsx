@@ -25,7 +25,7 @@ export function CatalogueToolbar({
   resultsCount,
   className,
 }: CatalogueToolbarProps) {
-  const { selections, genderLabels } = filtersProps;
+  const { selections, genderLabels, seasonLabels } = filtersProps;
   const [showTags, setShowTags] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const toolbarRef = useRef<HTMLDivElement | null>(null);
@@ -79,6 +79,11 @@ export function CatalogueToolbar({
         label: genderLabels[gender] ?? gender,
         onRemove: () => filtersProps.onToggleGender(gender),
       })),
+      ...selections.seasons.map((season) => ({
+        key: `season-${season}`,
+        label: seasonLabels[season] ?? season,
+        onRemove: () => filtersProps.onToggleSeason(season),
+      })),
       ...selections.brands.map((brand) => ({
         key: `brand-${brand}`,
         label: brand,
@@ -92,6 +97,8 @@ export function CatalogueToolbar({
       selections.brands,
       selections.families,
       selections.genders,
+      selections.seasons,
+      seasonLabels,
     ],
   );
 
