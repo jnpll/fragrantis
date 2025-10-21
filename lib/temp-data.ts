@@ -533,7 +533,7 @@ export const fragrances: Fragrance[] = [
       sub: ["Coconut", "FreshSpicy", "Woody", "Marine"]
     },
     description:
-      "A tropical escape bottled — the scent of lime, coconut, and white rum carried on a warm sea breeze. Inspired by sailing through the Caribbean waters.",
+      "Inspired by sailing through the Caribbean waters — the scent of lime, coconut, and white rum carried on a warm sea breeze.",
     otherDetails: {
       launchYear: 2007,
       manufacturerDescription:
