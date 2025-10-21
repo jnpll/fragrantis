@@ -11,7 +11,7 @@ import {
   olfactory_accords,
   olfactory_families,
 } from "@/lib/temp-data";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const genderLabels: Record<Gender, string> = {
   male: "Masculine",
@@ -22,6 +22,82 @@ const genderLabels: Record<Gender, string> = {
 const accordColorMap = new Map(
   olfactory_accords.map((accord) => [accord.name, accord.color] as const),
 );
+
+const CATALOGUE_STATE_KEY = "catalogue:filters";
+
+type StoredCatalogueState = {
+  families: string[];
+  accords: string[];
+  genders: Gender[];
+  brands: string[];
+  search: string;
+  sort: SortOption;
+};
+
+const SORT_OPTIONS: SortOption[] = [
+  "brand-asc",
+  "brand-desc",
+  "name-asc",
+  "name-desc",
+  "newest",
+  "oldest",
+];
+
+const GENDER_VALUES: Gender[] = ["male", "female", "unisex"];
+
+const isSortOption = (value: unknown): value is SortOption =>
+  typeof value === "string" && SORT_OPTIONS.includes(value as SortOption);
+
+const sanitizeStoredState = (value: unknown): StoredCatalogueState | null => {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const data = value as Partial<Record<keyof StoredCatalogueState, unknown>>;
+
+  const sanitizeStringArray = (input: unknown): string[] =>
+    Array.isArray(input)
+      ? input.filter((item): item is string => typeof item === "string")
+      : [];
+
+  const families = sanitizeStringArray(data.families);
+  const accords = sanitizeStringArray(data.accords);
+  const brands = sanitizeStringArray(data.brands);
+  const genders = Array.isArray(data.genders)
+    ? data.genders.filter((gender): gender is Gender =>
+        typeof gender === "string" && GENDER_VALUES.includes(gender as Gender),
+      )
+    : [];
+  const search =
+    typeof data.search === "string" ? (data.search as string) : "";
+  const sort = isSortOption(data.sort) ? (data.sort as SortOption) : "brand-asc";
+
+  return {
+    families,
+    accords,
+    genders,
+    brands,
+    search,
+    sort,
+  };
+};
+
+const readStoredCatalogueState = (): StoredCatalogueState | null => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  try {
+    const raw = window.sessionStorage.getItem(CATALOGUE_STATE_KEY);
+    if (!raw) {
+      return null;
+    }
+    const parsed = JSON.parse(raw);
+    return sanitizeStoredState(parsed);
+  } catch {
+    return null;
+  }
+};
 
 const familyById = new Map(
   olfactory_families.map((family) => [family.id, family.name] as const),
@@ -45,15 +121,30 @@ const brandOptions = Array.from(
   new Set(fragrances.map((fragrance) => fragrance.brand)),
 ).sort((a, b) => a.localeCompare(b));
 
-const genderOptions: Gender[] = ["male", "female", "unisex"];
+const genderOptions: Gender[] = [...GENDER_VALUES];
 
 export default function CataloguePage() {
-  const [selectedFamilies, setSelectedFamilies] = useState<string[]>([]);
-  const [selectedAccords, setSelectedAccords] = useState<string[]>([]);
-  const [selectedGenders, setSelectedGenders] = useState<Gender[]>([]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortOption, setSortOption] = useState<SortOption>("brand-asc");
+  const [storedState] = useState<StoredCatalogueState | null>(() =>
+    readStoredCatalogueState(),
+  );
+  const [selectedFamilies, setSelectedFamilies] = useState<string[]>(
+    () => storedState?.families ?? [],
+  );
+  const [selectedAccords, setSelectedAccords] = useState<string[]>(
+    () => storedState?.accords ?? [],
+  );
+  const [selectedGenders, setSelectedGenders] = useState<Gender[]>(
+    () => storedState?.genders ?? [],
+  );
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(
+    () => storedState?.brands ?? [],
+  );
+  const [searchQuery, setSearchQuery] = useState(
+    () => storedState?.search ?? "",
+  );
+  const [sortOption, setSortOption] = useState<SortOption>(
+    () => storedState?.sort ?? "brand-asc",
+  );
 
   const toggleSelection = <T,>(
     value: T,
@@ -65,6 +156,49 @@ export default function CataloguePage() {
         : [...prev, value],
     );
   };
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const payload: StoredCatalogueState = {
+      families: selectedFamilies,
+      accords: selectedAccords,
+      genders: selectedGenders,
+      brands: selectedBrands,
+      search: searchQuery,
+      sort: sortOption,
+    };
+
+    try {
+      const isPristine =
+        payload.families.length === 0 &&
+        payload.accords.length === 0 &&
+        payload.genders.length === 0 &&
+        payload.brands.length === 0 &&
+        payload.search.trim() === "" &&
+        payload.sort === "brand-asc";
+
+      if (isPristine) {
+        window.sessionStorage.removeItem(CATALOGUE_STATE_KEY);
+      } else {
+        window.sessionStorage.setItem(
+          CATALOGUE_STATE_KEY,
+          JSON.stringify(payload),
+        );
+      }
+    } catch {
+      // Ignore storage errors (e.g., quota exceeded, privacy mode)
+    }
+  }, [
+    selectedFamilies,
+    selectedAccords,
+    selectedGenders,
+    selectedBrands,
+    searchQuery,
+    sortOption,
+  ]);
 
   const filteredFragrances = useMemo(() => {
     return fragrances.filter((fragrance) => {

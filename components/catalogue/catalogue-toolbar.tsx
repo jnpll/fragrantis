@@ -144,7 +144,7 @@ export function CatalogueToolbar({
         </div>
       </div>
       {hasActiveFilters ? (
-        <div className="relative border-b backdrop-blur supports-backdrop-filter:bg-background/80">
+        <div className="relative backdrop-blur supports-backdrop-filter:bg-background/80">
           <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
             <div
               id="catalogue-active-filters"
