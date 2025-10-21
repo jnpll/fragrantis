@@ -64,13 +64,16 @@ const sanitizeStoredState = (value: unknown): StoredCatalogueState | null => {
   const accords = sanitizeStringArray(data.accords);
   const brands = sanitizeStringArray(data.brands);
   const genders = Array.isArray(data.genders)
-    ? data.genders.filter((gender): gender is Gender =>
-        typeof gender === "string" && GENDER_VALUES.includes(gender as Gender),
+    ? data.genders.filter(
+        (gender): gender is Gender =>
+          typeof gender === "string" &&
+          GENDER_VALUES.includes(gender as Gender),
       )
     : [];
-  const search =
-    typeof data.search === "string" ? (data.search as string) : "";
-  const sort = isSortOption(data.sort) ? (data.sort as SortOption) : "brand-asc";
+  const search = typeof data.search === "string" ? (data.search as string) : "";
+  const sort = isSortOption(data.sort)
+    ? (data.sort as SortOption)
+    : "brand-asc";
 
   return {
     families,
@@ -124,27 +127,12 @@ const brandOptions = Array.from(
 const genderOptions: Gender[] = [...GENDER_VALUES];
 
 export default function CataloguePage() {
-  const [storedState] = useState<StoredCatalogueState | null>(() =>
-    readStoredCatalogueState(),
-  );
-  const [selectedFamilies, setSelectedFamilies] = useState<string[]>(
-    () => storedState?.families ?? [],
-  );
-  const [selectedAccords, setSelectedAccords] = useState<string[]>(
-    () => storedState?.accords ?? [],
-  );
-  const [selectedGenders, setSelectedGenders] = useState<Gender[]>(
-    () => storedState?.genders ?? [],
-  );
-  const [selectedBrands, setSelectedBrands] = useState<string[]>(
-    () => storedState?.brands ?? [],
-  );
-  const [searchQuery, setSearchQuery] = useState(
-    () => storedState?.search ?? "",
-  );
-  const [sortOption, setSortOption] = useState<SortOption>(
-    () => storedState?.sort ?? "brand-asc",
-  );
+  const [selectedFamilies, setSelectedFamilies] = useState<string[]>([]);
+  const [selectedAccords, setSelectedAccords] = useState<string[]>([]);
+  const [selectedGenders, setSelectedGenders] = useState<Gender[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortOption, setSortOption] = useState<SortOption>("brand-asc");
 
   const toggleSelection = <T,>(
     value: T,
@@ -156,6 +144,48 @@ export default function CataloguePage() {
         : [...prev, value],
     );
   };
+
+  useEffect(() => {
+    const stored = readStoredCatalogueState();
+    if (!stored) {
+      return;
+    }
+
+    const normalisedFamilies = stored.families.filter((family) =>
+      familyOptions.includes(family),
+    );
+    const normalisedAccords = stored.accords.filter((accord) =>
+      accordOptions.includes(accord),
+    );
+    const normalisedBrands = stored.brands.filter((brand) =>
+      brandOptions.includes(brand),
+    );
+    const normalisedGenders = stored.genders.filter((gender) =>
+      genderOptions.includes(gender),
+    );
+    const normalisedSort = isSortOption(stored.sort)
+      ? stored.sort
+      : "brand-asc";
+
+    if (normalisedFamilies.length > 0) {
+      setSelectedFamilies(normalisedFamilies);
+    }
+    if (normalisedAccords.length > 0) {
+      setSelectedAccords(normalisedAccords);
+    }
+    if (normalisedGenders.length > 0) {
+      setSelectedGenders(normalisedGenders);
+    }
+    if (normalisedBrands.length > 0) {
+      setSelectedBrands(normalisedBrands);
+    }
+    if (stored.search.trim().length > 0) {
+      setSearchQuery(stored.search);
+    }
+    if (normalisedSort !== "brand-asc") {
+      setSortOption(normalisedSort);
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
