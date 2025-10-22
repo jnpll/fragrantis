@@ -2,10 +2,12 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
   olfactory_accords,
-  olfactory_families,
   type OlfactoryAccord,
+} from "@/lib/data/olfactory-accords";
+import {
+  olfactory_families,
   type OlfactoryFamily,
-} from "@/lib/temp-data";
+} from "@/lib/data/olfactory-families";
 import { formatAccordName, getAccordTextColor } from "@/lib/accord-utils";
 
 const familiesWithAccords = olfactory_families

@@ -5,13 +5,9 @@ import Link from "next/link";
 import { FragranceCard } from "@/components/catalogue/fragrance-card";
 import { CatalogueToolbar } from "@/components/catalogue/catalogue-toolbar";
 import { type SortOption } from "@/components/catalogue/filters-panel";
-import {
-  type Gender,
-  type Season,
-  fragrances,
-  olfactory_accords,
-  olfactory_families,
-} from "@/lib/temp-data";
+import { type Gender, type Season, fragrances } from "@/lib/data/fragrances";
+import { olfactory_accords } from "@/lib/data/olfactory-accords";
+import { olfactory_families } from "@/lib/data/olfactory-families";
 import { useEffect, useMemo, useState } from "react";
 
 const genderLabels: Record<Gender, string> = {

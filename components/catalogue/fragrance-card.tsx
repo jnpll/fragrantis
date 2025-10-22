@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatAccordName, getAccordTextColor } from "@/lib/accord-utils";
-import type { Fragrance } from "@/lib/temp-data";
+import type { Fragrance } from "@/lib/data/fragrances";
 
 type FragranceCardProps = {
   fragrance: Fragrance;

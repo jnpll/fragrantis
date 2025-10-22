@@ -8,7 +8,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { SheetFooter } from "@/components/ui/sheet";
 import { formatAccordName } from "@/lib/accord-utils";
-import type { Season } from "@/lib/temp-data";
+import type { Season } from "@/lib/data/fragrances";
 import { cn } from "@/lib/utils";
 import { SortControls, type SortOption } from "./sort-controls";
 
