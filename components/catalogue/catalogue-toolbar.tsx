@@ -151,7 +151,13 @@ export function CatalogueToolbar({
         </div>
       </div>
       {hasActiveFilters ? (
-        <div className="relative backdrop-blur supports-backdrop-filter:bg-background/80">
+        <div
+          className={
+            isSticky
+              ? "relative shadow-sm backdrop-blur supports-backdrop-filter:bg-background/80"
+              : "relative"
+          }
+        >
           <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
             <div
               id="catalogue-active-filters"
@@ -174,7 +180,7 @@ export function CatalogueToolbar({
               <Button
                 type="button"
                 size="icon"
-                variant="default"
+                variant="secondary"
                 onClick={() => setShowTags((prev) => !prev)}
                 aria-expanded={showTags}
                 aria-controls="catalogue-active-filters"
