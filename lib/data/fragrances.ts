@@ -55,9 +55,9 @@ export const fragrances: Fragrance[] = [
     },
   },
   {
-    name: "Y Eau de Parfum",
+    name: "Y",
     brand: "Yves Saint Laurent",
-    imageUrl: "https://i.ibb.co/Cpc31JjR/ysl-y-edp-1.jpg",
+    imageUrl: "https://i.ibb.co/Cpc31JjR/ysl-y-edp.jpg",
     intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["day", "night"],
@@ -122,8 +122,8 @@ export const fragrances: Fragrance[] = [
       "Lavender",
     ],
     accords: {
-      main: ["Vanilla", "Fruity"],
-      sub: ["Fougere", "Amber", "Warm Spicy"],
+      main: ["Amber", "Aromatic"],
+      sub: ["Vanilla", "Fruity", "Warm Spicy"],
     },
     description:
       "An irresistible blend of juicy pear, warm spices, and sensual vanilla — a bold evolution of the original Le Male.",
@@ -197,7 +197,7 @@ export const fragrances: Fragrance[] = [
     suitableSeasons: ["spring", "summer", "fall"],
     notes: ["Bergamot", "Orange Blossom", "Ambrofix", "Patchouli"],
     accords: {
-      main: ["Aromatic", "Woody"],
+      main: ["Floral", "Woody"],
       sub: ["Amber", "Citrus", "Mineral"],
     },
     description:
@@ -240,7 +240,7 @@ export const fragrances: Fragrance[] = [
   {
     name: "The One for Men",
     brand: "Dolce & Gabbana",
-    imageUrl: "https://i.ibb.co/r2JP7LVY/dolce-and-gabbana-the-one.webp",
+    imageUrl: "https://i.ibb.co/ZzXkx98f/dolce-and-gabbana-the-one-edp.jpg",
     intensity: "Eau de Parfum",
     gender: "male",
     suitableTimes: ["night"],
@@ -273,8 +273,8 @@ export const fragrances: Fragrance[] = [
     suitableSeasons: ["fall", "winter"],
     notes: ["Salty Note", "Tuberose", "Tonka Bean"],
     accords: {
-      main: ["Floral", "Vanilla"],
-      sub: ["Vanilla", "Warm Spicy", "Marine"],
+      main: ["Amber", "Floral"],
+      sub: ["Vanilla", "Marine"],
     },
     description:
       "An elixir of divine femininity — luminous white florals coated in honeyed sweetness and warm amber.",
@@ -298,8 +298,8 @@ export const fragrances: Fragrance[] = [
     suitableSeasons: ["spring", "fall", "winter"],
     notes: ["Lavender", "Orange Blossom", "Vanilla", "Tonka Bean", "Ambergris"],
     accords: {
-      main: ["Floral", "Amber"],
-      sub: ["Vanilla", "Aromatic", "Warm Spicy"],
+      main: ["Floral", "Fougère"],
+      sub: ["Amber", "Aromatic", "Vanilla"],
     },
     description:
       "Freedom in a bottle — the tension between masculine lavender and feminine orange blossom wrapped in sensual amber.",

@@ -12,6 +12,14 @@ import {
 } from "@/components/ui/card";
 import { formatAccordName, getAccordTextColor } from "@/lib/accord-utils";
 import type { Fragrance } from "@/lib/data/fragrances";
+import {
+  IconFlower,
+  IconLeaf,
+  IconMoon,
+  IconSnowflake,
+  IconSunHigh,
+  IconUmbrella2,
+} from "@tabler/icons-react";
 
 type FragranceCardProps = {
   fragrance: Fragrance;
@@ -56,6 +64,10 @@ export function FragranceCard({
   }, [accordColorMap, fragrance.accords.main]);
 
   const { borderGradient, glassGradient } = gradientConfig;
+  const formatLabel = (value: string) =>
+    value.charAt(0).toUpperCase() + value.slice(1);
+  const formatListLabel = (items: string[]) =>
+    items.map((item) => formatLabel(item)).join(" / ");
 
   return (
     <Card className="relative flex h-full flex-col overflow-hidden dark:rounded-2xl backdrop-blur-xl transition-shadow duration-200 hover:shadow-lg">
@@ -99,11 +111,16 @@ export function FragranceCard({
         )}
       </CardHeader>
       <CardContent className="flex flex-1 flex-col space-y-5">
-        <div id="fragrance-title" className="space-y-1">
-          <CardTitle className="text-xl">{fragrance.name}</CardTitle>
-          <CardDescription className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground/80">
+        <div id="fragrance-title" className="flex flex-col space-y-2">
+          <span className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground/60">
             {fragrance.brand}
-          </CardDescription>
+          </span>
+          <div className="space-y-1">
+            <CardTitle className="text-xl">{fragrance.name}</CardTitle>
+            <CardDescription className="text-xs font-semibold uppercase text-muted-foreground/80">
+              <span>{fragrance.intensity}</span>
+            </CardDescription>
+          </div>
         </div>
 
         <div id="fragrance-scent-profile" className="space-y-2">
@@ -146,9 +163,94 @@ export function FragranceCard({
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>{fragrance.otherDetails.launchYear}</span>
           <span aria-hidden="true">•</span>
-          <span>{fragrance.intensity}</span>
-          <span aria-hidden="true">•</span>
           <span>{genderLabel}</span>
+          {fragrance.suitableSeasons || fragrance.suitableTimes ? (
+            <span aria-hidden="true">•</span>
+          ) : null}
+          <div className="flex items-center gap-0.5">
+            {fragrance.suitableSeasons.length > 0 && (
+              <>
+                <span className="flex items-center">
+                  <span
+                    className="flex items-center gap-0.5"
+                    aria-label={formatListLabel(fragrance.suitableSeasons)}
+                    title={formatListLabel(fragrance.suitableSeasons)}
+                  >
+                    {fragrance.suitableSeasons.map((season) => {
+                      const iconSize = 14;
+                      const iconClassName = "text-muted-foreground/80";
+                      if (season === "spring") {
+                        return (
+                          <IconFlower
+                            key={`season-${season}`}
+                            size={iconSize}
+                            className={iconClassName}
+                          />
+                        );
+                      }
+                      if (season === "summer") {
+                        return (
+                          <IconUmbrella2
+                            key={`season-${season}`}
+                            size={iconSize}
+                            className={iconClassName}
+                          />
+                        );
+                      }
+                      if (season === "fall") {
+                        return (
+                          <IconLeaf
+                            key={`season-${season}`}
+                            size={iconSize}
+                            className={iconClassName}
+                          />
+                        );
+                      }
+                      return (
+                        <IconSnowflake
+                          key={`season-${season}`}
+                          size={iconSize}
+                          className={iconClassName}
+                        />
+                      );
+                    })}
+                  </span>
+                </span>
+              </>
+            )}
+            {fragrance.suitableTimes.length > 0 && (
+              <>
+                <span className="flex items-center">
+                  <span
+                    className="flex items-center gap-0.5"
+                    aria-label={formatListLabel(fragrance.suitableTimes)}
+                    title={formatListLabel(fragrance.suitableTimes)}
+                  >
+                    {fragrance.suitableTimes.map((time) => {
+                      const iconSize = 14;
+                      const iconClassName = "text-muted-foreground/80";
+                      if (time === "day") {
+                        return (
+                          <IconSunHigh
+                            key={`time-${time}`}
+                            size={iconSize}
+                            className={iconClassName}
+                          />
+                        );
+                      }
+                      return (
+                        <IconMoon
+                          key={`time-${time}`}
+                          size={iconSize}
+                          className={iconClassName}
+                        />
+                      );
+                    })}
+                  </span>
+                </span>
+              </>
+            )}
+          </div>
         </div>
       </CardFooter>
     </Card>
